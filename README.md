@@ -1,73 +1,46 @@
-# React + TypeScript + Vite
+# 🍲 Сборник рецептов (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 💡 Описание Проекта
 
-Currently, two official plugins are available:
+Это **клиент-серверное веб-приложение**, разработанное для удобного **поиска, добавления и редактирования кулинарных рецептов**. Проект нацелен на широкую аудиторию пользователей, ищущих вдохновение для приготовления пищи и желающих организовать свою коллекцию рецептов.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### ✨ Ключевые возможности
 
-## React Compiler
+* **Поиск и фильтрация:** Эффективный поиск рецептов по названию и категориям.
+* **Управление пользователями:** Регистрация и авторизация.
+* **Персонализация:** Возможность добавлять понравившиеся рецепты в **"Избранное"**.
+* **Сообщество:** Возможность оставлять **отзывы** и оценки к рецептам.
+* **Контент:** Добавление и редактирование собственных рецептов.
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Стек Технологий 
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Фронтенд проекта построен на современных и надежных технологиях:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+| Компонент | Технология | Назначение |
+| :--- | :--- | :--- |
+| **Фреймворк** | **React** | Основная библиотека для построения пользовательского интерфейса. |
+| **Языки** | **JavaScript**, HTML, CSS | Основные языки разработки. |
+| **Стилизация** | **SASS** (SCSS) | CSS-препроцессор для организации и расширения возможностей стилей. |
+| **Лейаут** | **Flexbox** | Использование Flexbox для создания гибких и адаптивных макетов. |
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+**Ожидается дополнение:** *Этот раздел будет обновлен с указанием **менеджера состояний** (например, Redux/Zustand) и **роутера** (например, React Router), как только они будут выбраны и интегрированы.*
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🔗 Ссылки и Документация
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 🎨 Прототип дизайна страниц (Figma)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Дизайн, макеты и интерактивный прототип всех страниц доступны для просмотра и ознакомления по следующей ссылке:
+
+[Прототипы Recipes App (Figma)](https://www.figma.com/design/WliNk7CBsOd8J0SC6TZdPP/Recipes-?node-id=0-1&t=cTrsjmC7f7cWxXN2-1)
+
+### 🖥️ API Сервера 
+
+Фронтенд взаимодействует с серверной частью через API.
+
+![photo_2025-09-28_18-44-35](https://github.com/user-attachments/assets/56e4fd3c-7cfe-41f8-a15d-a70d42edb664)
+
+---
