@@ -3,7 +3,7 @@ import heart from '../../assets/like-heart.svg'
 import starEmpty from '../../assets/star-empty.svg'
 import starFilled from '../../assets/star-filled.svg'
 
-const RecipeCard = ({recipe}) => {
+const RecipeCard = ({recipe, isSmall}) => {
   const renderStars = (rating) => {
     const stars =[];
     for(let i = 1; i <=5; i++){
@@ -17,8 +17,11 @@ const RecipeCard = ({recipe}) => {
     return <div className={styles['ratingContainer']}>{stars}</div>;
   }
 
+   const smallClass = isSmall ? styles['card--small'] : '';
+  const cardClasses = `${styles.card} ${smallClass}`; 
+
   return (
-    <div className={styles.card}>
+    <div className={cardClasses}>
       <div className={styles['frame']}>
         <div className={styles['image-container']}>
           <img src={recipe.image} alt={recipe.name} className={styles["image"]}/>
