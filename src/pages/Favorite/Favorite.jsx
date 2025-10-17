@@ -10,16 +10,18 @@ const NewRecipesData = [
   { id: 2, name: 'запечённая рыба', image: fish, meal: 'ужин', time: '90 минут', rating: 3 },
   { id: 3, name: 'хачапури по-аджарски и что то там ещё вкусное', image: khachapuri, meal: 'ужин', time: '45 минут', rating: 4 },
   { id: 4, name: 'пельмешки', image: dumplings, meal: 'обед', time: '10 минут', rating: 5},
+   { id: 1, name: 'пельмешки', image: dumplings, meal: 'обед', time: '10 минут', rating: 5},
+  
 ];
 const Favorite = () => {
   return (
     <div className={styles.favorite}>
-      <div className={styles["new-recipes-title"]}>
+      <div className={styles["fav-recipes-title"]}>
         <p> My favorite </p>
       </div> 
 
-      <div className={styles["new-recipes"]}>
-        <div className={styles["new-recipes-cards"]}>
+      <div className={styles["fav-recipes"]}>
+        <div className={styles["fav-recipes-cards"]}>
           {NewRecipesData.map((recipe) => (
             <RecipeCard
               key = {recipe.id}

@@ -9,8 +9,8 @@ const App = () => {
         <Navbar/>
         <Catalog/>
         <div className="content">
-          <Home/>
-          {/* <Favorite/> */}
+          {/* <Home/> */}
+          <Favorite/>
         </div>
         <Footer/>
       </div>

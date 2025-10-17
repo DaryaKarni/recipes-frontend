@@ -3,30 +3,85 @@
 .card{
   display: flex;
   background-color: $color-white;
-  width: 22%; // Это ширина для десктопа (будет переопределена в _home.scss)
+  width: 22%; 
   height: auto;
-  border-radius: clamp(5vw, 1vw, 80px);
+  border-radius: clamp(1vw, 5vw, 80px);
   align-items:center;
   justify-content: center;
-  padding: 1%;
+  padding: 1.2%;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   &.card--small { 
-    .info {
-      .name {
-        p {
-          font-size: clamp(0.9rem, 1.4vw, 20px) !important;
+    border-radius: clamp(2rem, 6vmin, 150px);
+    .frame{
+      border-radius: clamp(2rem, 5vmin, 100px);
+      .image-container{
+        .image{
+          border-radius: clamp(2rem, 4vmin, 80px);
         }
-      }
-      .content {
-        .text {
-          font-size: clamp(0.7rem, 1.0vw, 16px) !important;
-        }
-        .rating {
-          img {
-            width: 1.5vw; 
+        .favorite{
+          top: 12%;
+          right: 12%;
+          img{
+            width: 2.3vw;
+            height: auto;
           }
         }
       }
+      .info {
+        .name {
+          p {
+            font-size: clamp(0.9rem, 1.4vw, 20px) !important;
+          }
+        }
+        .content {
+          .text {
+            font-size: clamp(0.7rem, 1.0vw, 16px) !important;
+          }
+          .rating {
+            img {
+              width: 21%;
+              height: auto;
+            }
+          }
+        }
+      }
+    }
+    @media(max-width: 768px){
+      border-radius: clamp(2rem, 6vmin, 150px);
+      .frame{
+      border-radius: clamp(2rem, 5vmin, 100px);
+      .image-container{
+        .image{
+          border-radius: clamp(2rem, 3vmin, 80px);
+        }
+        .favorite{
+          top: 12%;
+          right: 12%;
+          img{
+            width:4vw;
+            height: auto;
+          }
+        }
+      }
+      .info {
+        .name {
+          p {
+            font-size: clamp(0.9rem, 1.2vw, 20px) !important;
+          }
+        }
+        .content {
+          .text {
+            font-size: clamp(0.7rem, 0.9vw, 16px) !important;
+          }
+          .rating {
+            img {
+              width: 22%;
+              height: auto;
+            }
+          }
+        }
+      }
+    }
     }
   }
   
