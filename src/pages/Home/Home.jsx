@@ -54,6 +54,7 @@ const Home = () => {
               key = {recipe.id}
               recipe= {recipe}
               isSmall={false}
+              //isFavoriteSection={false}
               />
           ))}
           </div>

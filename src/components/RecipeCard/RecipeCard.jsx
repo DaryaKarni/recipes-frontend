@@ -1,9 +1,19 @@
+import {useState} from 'react'
 import styles from './RecipeCard.module.scss'
-import heart from '../../assets/like-heart.svg'
+import heartFilled from '../../assets/like-heart-filled.svg'
+import heartEmpty from '../../assets/like-heart-empty.svg'
 import starEmpty from '../../assets/star-empty.svg'
 import starFilled from '../../assets/star-filled.svg'
 
-const RecipeCard = ({recipe, isSmall}) => {
+const RecipeCard = ({recipe, isSmall, isFavorite = false}) => {
+  const [isLiked, setIsLiked] = useState(isFavorite);
+  const HandleLikeToggle = (event) =>{
+    event.stopPropagation();
+    setIsLiked(prevIsLiked => !prevIsLiked);
+
+  }
+  const heartIcon = isLiked ? heartFilled : heartEmpty;
+
   const renderStars = (rating) => {
     const stars =[];
     for(let i = 1; i <=5; i++){
@@ -25,8 +35,8 @@ const RecipeCard = ({recipe, isSmall}) => {
       <div className={styles['frame']}>
         <div className={styles['image-container']}>
           <img src={recipe.image} alt={recipe.name} className={styles["image"]}/>
-          <div className={styles['favorite']}>
-            <img src={heart} alt="" className={styles.heart}/>
+          <div className={styles['favorite']} onClick={HandleLikeToggle}>
+            <img src={heartIcon} alt="" className={styles.heart}/>
           </div>
         </div>
         <div className={styles['info']}>

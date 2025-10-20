@@ -71,6 +71,7 @@
         .description{
           font-size: clamp(1.2rem, 2vw, 24px);
           font-style:italic;
+          white-space: nowrap;
         }
         button{
           width: 60%;

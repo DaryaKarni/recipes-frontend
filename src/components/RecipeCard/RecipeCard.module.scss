@@ -11,18 +11,18 @@
   padding: 1.2%;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   &.card--small { 
-    border-radius: clamp(2rem, 6vmin, 150px);
+    border-radius: clamp(1rem, 8vmin, 300px);
     .frame{
-      border-radius: clamp(2rem, 5vmin, 100px);
+      border-radius: clamp(1rem, 7vmin, 200px);
       .image-container{
         .image{
-          border-radius: clamp(2rem, 4vmin, 80px);
+          border-radius: clamp(1rem, 6vmin, 100px);
         }
         .favorite{
           top: 12%;
           right: 12%;
           img{
-            width: 2.3vw;
+            width: 4vmin;
             height: auto;
           }
         }
@@ -46,43 +46,43 @@
         }
       }
     }
-    @media(max-width: 768px){
-      border-radius: clamp(2rem, 6vmin, 150px);
-      .frame{
-      border-radius: clamp(2rem, 5vmin, 100px);
-      .image-container{
-        .image{
-          border-radius: clamp(2rem, 3vmin, 80px);
-        }
-        .favorite{
-          top: 12%;
-          right: 12%;
-          img{
-            width:4vw;
-            height: auto;
-          }
-        }
-      }
-      .info {
-        .name {
-          p {
-            font-size: clamp(0.9rem, 1.2vw, 20px) !important;
-          }
-        }
-        .content {
-          .text {
-            font-size: clamp(0.7rem, 0.9vw, 16px) !important;
-          }
-          .rating {
-            img {
-              width: 22%;
-              height: auto;
-            }
-          }
-        }
-      }
-    }
-    }
+  //    @media(max-width: 768px){
+  //     border-radius: clamp(2rem, 6vmin, 150px);
+  //     .frame{
+  //     border-radius: clamp(2rem, 5vmin, 100px);
+  //     .image-container{
+  //       .image{
+  //         border-radius: clamp(2rem, 3vmin, 80px);
+  //       }
+  //       .favorite{
+  //         top: 12%;
+  //         right: 12%;
+  //         img{
+  //           width:4vw;
+  //           height: auto;
+  //         }
+  //       }
+  //     }
+  //     .info {
+  //       .name {
+  //         p {
+  //           font-size: clamp(0.9rem, 1.2vw, 20px) !important;
+  //         }
+  //       }
+  //       .content {
+  //         .text {
+  //           font-size: clamp(0.7rem, 0.9vw, 16px) !important;
+  //         }
+  //         .rating {
+  //           img {
+  //             width: 22%;
+  //             height: auto;
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
   }
   
   .frame{
