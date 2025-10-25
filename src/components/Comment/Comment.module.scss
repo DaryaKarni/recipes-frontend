@@ -7,7 +7,7 @@
     margin-bottom: 1vh;
   }
   .textBlock{
-    width: 37vw;
+    //width: 37vw;
     min-height: 10vh;
     height: 100%;
     display: flex;
@@ -29,4 +29,11 @@
 
     
   }
+  @media(max-width: 768px){
+    .textBlock{
+      border-radius: 3vmin;
+      padding: 1vh 3vw;
+    }
+  
+}
 }

@@ -7,7 +7,7 @@
   flex-direction: column;
   height: 100%; 
   min-height: 70vh;
-
+  background-color: $color-white;
   .fav-recipes-title{
     background-color: $color-white;
     text-align:center;
@@ -16,56 +16,4 @@
     border-bottom: 1px solid $color-yellow;
   }
 
-  .fav-recipes{
-    display: flex;
-    min-height: 72vh;
-    background-color: $color-white;
-    justify-content: center;
-    width: 100%;
-   
-    .fav-recipes-cards{
-      justify-content: flex-start;
-      margin: 3vh 15vw;
-      flex-wrap: wrap;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      gap: 10px;
-
-     & > * {
-         flex-basis: calc(25% - 8px); // Примерный расчет для 4 в ряд
-      }
-      
-    }
-  }
-
-  @media(max-width: 1024px){
-    .fav-recipes{
-      .fav-recipes-cards{
-        margin: 3vh 15vw; 
-        gap: 15px; 
-                
-        & > * { 
-          flex-basis: calc(30% - 15px); 
-          padding: 1.4%;
-        }
-      }      
-    }
-  }
-  @media(max-width: 786px){
-    .fav-recipes-title{
-       font-size: clamp(1.4rem, 5vw, 2rem);
-    }
-    .fav-recipes{
-      .fav-recipes-cards{
-        margin: 3vh 20vw; 
-        gap: 20px; 
-                
-        & > * { 
-          flex-basis: calc(50% - 15px); 
-          padding: 2%;
-        }
-      }      
-    }
-  }
 }

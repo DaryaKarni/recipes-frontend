@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width:100%;
   .preview{
     .header{
       p{
@@ -28,6 +29,7 @@
       background-color: $color-yellow;
       border-radius: 5vw;
       padding: 1.3vw;
+      align-items: center;
       justify-content: center;
         .image{
           width: 30vw;
@@ -67,8 +69,9 @@
     display: flex;
     flex-direction: column;
     gap: 4vh;
+    width: 37vw;
     .description{
-      width: 37vw;
+      
       min-height: 10vh;
       display: flex;
       flex-direction: column;
@@ -88,7 +91,6 @@
       }
     }
     .cookingTime{
-      width: 37vw;
       min-height: 10vh;
   
       height: 100%;
@@ -119,14 +121,13 @@
   
     }
     .countOfServings{
-      width: 37vw;
       min-height: 8vh;
   
       height: 100%;
       display: inline-flex;
       justify-content: space-between;
       border: 2px solid $color-yellow;
-      border-radius: 3vw;
+      border-radius: 2vw;
       padding: 0.5vh 1.5vw;
       align-items: center;
       .title{
@@ -139,7 +140,6 @@
     }
     
     .ingredients{
-      width: 37vw;
       min-height: 10vh;
       
       height: 100%;
@@ -153,11 +153,10 @@
       gap: 3vh;
       .title{
         font-size: clamp(1rem, 2vw, 28px);
-        margin-bottom: 1vh;
+        margin-bottom: 0vh;
       }
     }
     .cooking{
-      width: 37vw;
       min-height: 10vh;
       display: flex;
       flex-direction: column;
@@ -179,9 +178,9 @@
   }
   .feetbackSection{
     display: flex;
+    align-items: center;
     flex-direction: column;
     width:100vw;
-    //height: 100%;
     .whiteBlock{
       width:100%;
       height:5vh;
@@ -226,25 +225,203 @@
       flex-direction: column;
       align-items: center;
       gap: 4vh;
+      
       .personalComment{
         display: flex;
         flex-direction: column;
         gap: 2vh;
         align-items: flex-end;
+       
         .comment{
+          width:37vw;
           margin-bottom: 2vh;
         }
-        .button{
-          display: flex;
-          margin-top: 2vh;
-          font-size: clamp(1rem, 2vw, 24px); 
-        }
+        
       }
       
       .comments{
+        width:37vw;
         display: flex;
         flex-direction: column;
         gap: 4vh;
+      }
+    }
+  }
+  @media(max-width: 1024px){
+    
+    .info{
+      width: 50vw;
+    }
+    .feetbackSection{
+      .rateRecipe{
+        >*{
+          img{
+            width: 4vw;
+          }
+        }
+      }
+      .header{
+      .title{
+          margin-left: 27vw;
+      }
+    }
+      .commentSection{
+        
+        .personalComment{
+          .comment{
+            width: 50vw;
+          }
+        }
+        .comments{
+          width: 50vw;
+        }
+      }
+    }
+  }
+
+  @media(max-width: 786px){
+      
+    .preview{
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      .header{
+      p{
+        text-align: center;
+      }
+      .category{
+        padding-right: clamp(2vw, 30vw, 150px);
+        font-style: italic;
+        font-size: clamp(1rem, 2vw, 28px);
+      }
+      .title{
+        font-size: clamp(1.5rem, 4vw, 60px);
+      }
+      .author{
+        font-size: clamp(1rem, 3vw, 28px);
+      }
+      margin-bottom: 3vh;
+    }
+      .cardImage{
+       align-items: center;
+      justify-content: center;
+      padding: 2vw;
+      border-radius: 8vmin;
+        .image{
+          min-width: 50vw;
+          border-radius: 7vmin;
+        }
+      }
+      .ratingInfo{
+      display: flex;
+      justify-content: center;
+      gap: 4vw;
+      align-items: center;
+      margin-top: 3vh;
+      *{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      p{
+        font-size: clamp(0.8rem, 2.5vw, 28px);
+      }
+      img{
+        width: 4vw;
+      }
+      .comments{
+        gap: 1vw;
+      }
+      .rating{
+        gap: 1vw;
+      }
+    }
+    }
+    .info{
+      margin-top: 7vh;
+      width: 60vw;
+       .description{
+        border-radius: 2vmax;
+        padding: 1vh 3vw;
+        .title{
+          margin-bottom: 1vh;
+        }
+      //align-items: ;
+      
+    }
+    .cookingTime{
+  
+      border-radius: 2vmax;
+      padding: 1vh 3vw;
+
+      .title{
+        margin-bottom: 1vh;
+      }
+      .general{
+        
+        .text{
+       
+        margin-bottom: 1vh;
+        }
+        .time{
+
+
+        }
+      }
+  
+    }
+    .countOfServings{
+      border-radius: 2vmax;
+      padding: 1vh 3vw;
+      min-height: 6vh;
+      .title{
+        font-size: clamp(1rem, 2vw, 28px);
+        margin-bottom: 0.5vh;
+      }
+      .count{
+        font-size: clamp(0.9rem, 1.3vw, 28px);
+      }
+    }
+    
+    .ingredients{
+      border-radius: 2vmax;
+       padding: 1vh 3vw;
+       padding-bottom: 2vh;
+    }
+    .cooking{
+      border-radius: 2vmax;
+       padding: 1vh 3vw;
+    
+    }
+  
+     
+      
+    }
+    .feetbackSection{
+      .header{
+        height:10vh;
+      .title{
+          margin-left: 23vw;
+      }
+    }
+      .rateRecipe{
+        >*{
+          img{
+            width: 5vw;
+          }
+        }
+      }
+      .commentSection{
+        .personalComment{
+          
+          .comment{
+            width: 60vw;
+            
+          }
+        }
+        .comments{
+          width: 60vw;
+        }
       }
     }
   }

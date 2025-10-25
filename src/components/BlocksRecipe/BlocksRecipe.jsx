@@ -4,15 +4,17 @@ import styles from './BlocksRecipe.module.scss'
 
 const BlocksRecipe = ({data, isFavoriteSection}) => {
   return (
-    <div className={styles["block-cards"]}>
+    <div className={styles["frame-block-cards"]}>
+      <div className={styles["block-cards"]}>
       {data.map((recipe) => (
         <RecipeCard
           key = {recipe.id}
           recipe= {recipe}
           isSmall={true}
-          isFavorite={recipe}
+          isFavorite={isFavoriteSection}
         />
       ))}
+      </div>
     </div>
   )
 }

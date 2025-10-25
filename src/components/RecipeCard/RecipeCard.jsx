@@ -14,7 +14,7 @@ const RecipeCard = ({recipe, isSmall, isFavorite = false}) => {
   }
   const heartIcon = isLiked ? heartFilled : heartEmpty;
 
-   const smallClass = isSmall ? styles['card--small'] : '';
+  const smallClass = isSmall ? styles['card--small'] : '';
   const cardClasses = `${styles.card} ${smallClass}`; 
 
   return (

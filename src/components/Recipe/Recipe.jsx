@@ -127,12 +127,16 @@ const Recipe = ({recipe}) => {
         </div>
         <div className={styles["commentSection"]}>
             <div className={styles["personalComment"]}>
-              <Comment className={styles["comment"]}
-                authorUsername={username}
-                //commentText={'Добавить комментарий'}
-                isPersonal = {true}
+              <div className={styles["comment"]}>
+                 <Comment 
+                  authorUsername={username}
+                  //commentText={'Добавить комментарий'}
+                  isPersonal = {true}
               /> 
-              <Button buttonName = {'отправить'} className={styles["button"]}/>
+              </div>
+             <div className={styles["button"]}>
+              <Button buttonName = {'отправить'} />
+              </div>
             </div>
             <div className={styles["comments"]}>
              {recipe.commentDTOs.map((comment) => (
