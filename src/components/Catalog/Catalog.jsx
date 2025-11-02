@@ -8,9 +8,9 @@ const Catalog = () => {
       
         <a href="/popular">Popular</a>
         <li>Categories</li>
-        <a href="/favourites" className={styles['favourites']}>
+        <a href="/favorite" className={styles['favourites']}>
           <img src={heart_icon} alt="" className={styles['heart-icon']}></img> 
-          Favourites
+          Favorite
         </a>
      
     </ul>

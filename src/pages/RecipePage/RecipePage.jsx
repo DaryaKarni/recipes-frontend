@@ -1,9 +1,14 @@
 import Recipe from '../../components/Recipe/Recipe'
 import styles from './RecipePage.module.scss'
-
+import { useParams } from 'react-router-dom'
+import {useState, useEffect} from 'react'
 import imageCupcakes from '../../assets/fake-recipes-images/cupcakes.svg'
 
-const RecipeData = 
+import dumplings from '../../assets/fake-recipes-images/dumplings.svg';
+import imageRecipe from '../../assets/ratatouille.svg'
+
+const RecipeData = [
+  
   {
     id: 1, 
     title: 'Кексы с кабачком', 
@@ -36,12 +41,88 @@ const RecipeData =
         {id: 201, commentText: 'ммм балдеж', createdAt: null, authorId: null, authorUsername: 'Светлана'},
         {id: 202, commentText: 'Сегодня мы будем готовить мои любимые фритатататататато для этого мне понадобятся мои любимые помидорки мой любимый перчик и мои любимые яйца а где яйца инвалид где мои яйца м где мои яйца где мои яйца всё есть где мои яйца где мои яйца', createdAt: null, authorId: null, authorUsername: 'Шеф'},
     ]
+  },
+   {
+    id: 2, 
+    title: 'Пельмешки', 
+    authorUsername: 'modory', 
+    image: dumplings,
+    description: 'Очень вкусные пельмешки', 
+    instruction: 'Закипятите воду и закиньте пельмешки', 
+    cookingTime: 10, 
+    countOfServings: 2, 
+    averageRating: 5, 
+    commentsCount: 2, 
+    ratingCount: 150,
+    categoryId: null, 
+    categoryName: 'обед', 
+    isFavourite: false, 
+    userRating: 0,
+    ingredientDTOs: [ 
+      {id: 101, name: 'Пельмени', amount: 200.0, stringUnit: 'г'},
+      {id: 102, name: 'Вода', amount: 1.0, stringUnit: 'л.'},
+      {id: 103, name: 'Соль', amount: 0.5, stringUnit: 'ст.л.'},
+    ],
+    commentDTOs: [ 
+        {id: 201, commentText: 'супер', createdAt: null, authorId: null, authorUsername: 'Светлана'},
+        {id: 202, commentText: 'лучший рецепт', createdAt: null, authorId: null, authorUsername: 'Василий'},
+    ]
   }
+]
 
 const RecipePage = () => {
+  const {id} = useParams();
+
+  const [recipe, setRecipe] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect (() => {
+    if(!id){
+      setError("Идентификатор рецепта не найден в URL.");
+      setIsLoading(false);
+      return;
+    }
+    const fetchRecipeById = async () => {
+      setIsLoading(true);
+      setError(null);
+
+      try{
+        const response = await fetch(`/api/v1/recipes/${id}`);
+
+        if(!response.ok){
+          throw new Error(`HTTP Error! Status: ${response.status}`);
+        }
+
+        const jsonResponse = await response.json();
+
+        if(jsonResponse.status === 'success' && jsonResponse.data){
+          setRecipe(jsonResponse.data);
+        }
+        else {
+           throw new Error("Recipe data not found.");
+        }
+      }
+      catch (e) {
+        console.error("Failed to fetch recipe by ID:", e);
+        setError('Не удалось загрузить рецепт. Возможно, его не существует.');
+        setRecipe(null);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchRecipeById();
+  }, [id])
+
+  if(isLoading){
+    return <div>Загрузка рецепта...</div>;
+  }
+  if (error || !recipe){
+    return <div>{error || 'Рецепт не найден'}</div>
+  }
   return (
     <div className={styles.page}>
-      <Recipe recipe={RecipeData}/>
+      <Recipe recipe={recipe}/>
     </div>
   )
 }

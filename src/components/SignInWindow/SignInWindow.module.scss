@@ -1,0 +1,91 @@
+@use '../../styles/abstracts/variables' as *;
+
+.window{
+  display: flex;
+ 
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 1000; 
+  
+  .frame{
+    border-radius: 10vmin;
+    padding: 0.8vw;
+    background-color: $color-yellow;
+    .block{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3vw;
+      border-radius: 9vmin;
+      //width: 40vw;
+      background-color: $color-white;
+      gap: 5vh;
+      position: relative;
+      .title{
+        font-size: clamp(1.3rem, 3vw, 32px);
+      }
+      .cross{
+        width: 3vw;
+        right: -5vmin;
+        top: -5vmin;
+        position: absolute;
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out;
+        &:hover{
+          transform: scale(1.1);
+        }
+        //z-index: 10;
+      }
+      .fields{
+        display: inline-flex;
+        gap: 2vw;
+        width: 100%;
+        .columnNames{
+          margin-top: 1vh;
+          display: flex;
+          flex-direction: column;
+          gap: 5vh;
+        }
+        .inputFields{
+          display: flex;
+          flex-direction: column;
+          gap: 3vh;
+          *{
+            background-color: $color-yellow;
+            
+            padding: 1vh 2vw;
+            padding-top: 0.5vh;
+            border-radius: 2vw;
+            line-height: 1.5;
+            input{
+              width: 100%;
+              overflow-y: hidden;
+              resize: none;
+              border: none;
+              outline: none;
+              border-bottom: 2px solid $color-white;  
+              border-radius: 0;
+              padding: 0 0 0;
+              margin: 0.5vh 0vw;
+              font-size: clamp(1.3rem, 1vw, 16px);
+              line-height: 1; 
+              
+            }
+          }
+          .loginBlock{
+            width: 60%;
+          }
+          .passwordBlock{
+            width: 80%;
+          }
+        }
+      }
+    }
+  }
+}

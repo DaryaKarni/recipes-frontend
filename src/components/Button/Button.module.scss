@@ -1,18 +1,29 @@
 @use '../../styles/abstracts/variables' as *;
 
 .button{
-  //width: 10vw;
-  //height: 7vh;
-  //margin-top: 7vh;
   background-color: $color-yellow ;
-  //font-style:italic;
   font-size: clamp(1rem, 1.3vw, 24px); 
   border-radius: 80px;
   border-style: none;
   padding: 2vmin 2vw;
   align-items: center;
   box-shadow: 0 7px 3px #C0C0C0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  &[disabled]{
+    cursor: not-allowed;
+    background-color: $color-gray-light;
+    color: black;
+  }
+  &:hover:not([disabled]){
+    transform: scale(1.05);
+    cursor: pointer;
 
+  }
+  &:active:not([disabled]) {
+        transform: translateY(4px);
+        box-shadow: 0 3px 3px #999; 
+        
+    }
   @media(max-width: 1024px){
     padding: 2vh 2vw;
   }

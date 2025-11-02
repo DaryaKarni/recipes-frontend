@@ -63,7 +63,7 @@ const Recipe = ({recipe}) => {
           </p>
         </div>
         <div className={styles["cardImage"]}>
-          <img src={recipe.image} alt="" className={styles["image"]}/>
+          <img src={`http://26.242.102.42:8080/uploads/${recipe.image}`} alt="" className={styles["image"]}/>
         </div>
         <div className={styles["ratingInfo"]}>
           <img src={heart}/>
@@ -72,7 +72,7 @@ const Recipe = ({recipe}) => {
             <img src={comment}/>
           </div>
           <div className= {styles["rating"]}>
-            <p>{recipe.ratingCount}</p>
+            <p>{recipe.countOfRatings}</p>
             <StarRating
               rating = {recipe.averageRating}
             />
@@ -121,7 +121,7 @@ const Recipe = ({recipe}) => {
         <div className={styles["rateRecipe"]}>
           <p className={styles["title"]}>Оценить рецепт</p>
           <StarRatingInteractive
-            initialRating = {recipe.userReting}
+            initialRating = {recipe.userRating}
             onRatingChange={handleNewRating}
           />
         </div>

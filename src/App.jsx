@@ -5,19 +5,27 @@ import Footer from './components/Footer/Footer'
 import Favorite from './pages/Favorite/Favorite'
 import RecipePage from './pages/RecipePage/RecipePage'
 import Profile from './pages/Profile/Profile'
+
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 const App = () => {
   return (
+    <Router>
       <div >
         <Navbar/>
         <Catalog/>
         <div className="content">
-          {/* <Home/> */}
-          <Favorite/>
-          {/* <RecipePage/> */}
-          <Profile/>
+          <Routes>
+
+            <Route path="/" element={<Home/>} /> 
+            <Route path="/favorite" element={<Favorite/>} /> 
+            <Route path="/recipe/:id" element={<RecipePage/>} /> 
+            <Route path="/profile" element={<Profile/>} /> 
+         
+          </Routes>
         </div>
         <Footer/>
       </div>
+    </Router>
   );
 }
 
