@@ -21,13 +21,13 @@ const RecipeCard = ({recipe, isSmall, isFavorite = false}) => {
 
   const heartIcon = isLiked ? heartFilled : heartEmpty;
   const smallClass = isSmall ? styles['card--small'] : '';
-  const cardClasses = `${styles.card} ${smallClass}`; 
+  const cardClasses = `${styles.card} ${smallClass}`;
 
   return (
     <div className={cardClasses} onClick={HandleCardClick}>
       <div className={styles['frame']}>
         <div className={styles['image-container']}>
-          <img src={`http://26.242.102.42:8080/uploads/${recipe.image}`} alt={recipe.title} className={styles["image"]}/>
+          <img src={`/uploads/${recipe.image}`} alt={recipe.title} className={styles["image"]}/>
           <div className={styles['favorite']} onClick={HandleLikeToggle}>
             <img src={heartIcon} alt="" className={styles.heart}/>
           </div>

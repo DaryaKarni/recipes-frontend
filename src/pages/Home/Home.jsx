@@ -24,7 +24,7 @@ const DayRecipeData = [
 const Home = () => {
   //const dayRecipe = DayRecipeData[0];
   const navigate = useNavigate();
-  
+
 
   const [dayRecipe, setDayRecipe] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -57,7 +57,7 @@ const Home = () => {
       }
     };
     fetchDayRecipe();
-    
+
   }, []);
 
   useEffect (() => {
@@ -84,7 +84,7 @@ const Home = () => {
       }
     };
     fetchNewRecipes();
-    
+
   }, []);
 
   const HandleClickToRecipe = () => {
@@ -104,11 +104,11 @@ const Home = () => {
   if (error) {
     return <div className={styles.home}><p style={{textAlign: 'center', padding: '50px', color: 'red'}}>{error} 😢</p></div>;
   }
-  
+
   if (!newRecipes) {
     return <div className={styles.home}><p style={{textAlign: 'center', padding: '50px'}}>Новейшие рецепты не доступны. 😔</p></div>;
   }
-  
+
   if (isNewLoading) {
     return <div className={styles.home}><p style={{textAlign: 'center', padding: '50px'}}>Загрузка новейших рецептов... ⏳</p></div>;
   }
@@ -116,7 +116,7 @@ const Home = () => {
   if (newError) {
     return <div className={styles.home}><p style={{textAlign: 'center', padding: '50px', color: 'red'}}>{newError} 😢</p></div>;
   }
-  
+
   if (!newRecipes) {
     return <div className={styles.home}><p style={{textAlign: 'center', padding: '50px'}}>Рецепт дня не доступен. 😔</p></div>;
   }
@@ -125,7 +125,7 @@ const Home = () => {
     <div className={styles.home}>
       <div className={styles["day-recipe"]}>
         <div className={styles["recipe"]}>
-          {dayRecipe && <img src={`http://26.242.102.42:8080/uploads/${dayRecipe.image}`} alt="" className={styles["imageRecipe"]}/>}
+          {dayRecipe && <img src={`/uploads/${dayRecipe.image}`} alt="" className={styles["imageRecipe"]}/>}
           <div className={styles['info']}>
             <p className={styles['name']}>
               {dayRecipe && dayRecipe.title}
@@ -135,7 +135,7 @@ const Home = () => {
             </p>
             <Button buttonName={'to recipe'} className={styles["button"]} onClick={HandleClickToRecipe}/>
           </div>
-          
+
         </div>
         <div className={styles["background"]}>
           <img src={background} alt=""></img>
@@ -145,7 +145,7 @@ const Home = () => {
 
       <div className={styles["new-recipes-title"]}>
         <p> New recipes </p>
-      </div> 
+      </div>
 
       <div className={styles["new-recipes"]}>
         <div className={styles["new-recipes-cards"]}>
@@ -158,8 +158,8 @@ const Home = () => {
               />
           ))}
           </div>
-        </div>  
-        
+        </div>
+
     </div>
   )
 }
