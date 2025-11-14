@@ -8,6 +8,9 @@ const USER_REGEX = /^[A-Za-z][a-zA-Z0-9-_]{6,16}$/;
 const MAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const PWD_REGEX = /^(?=.*?[0-9])(?=.*?[A-Za-z]).{8,24}$/;
 
+const CHECK_USERNAME_URL = '/api/v1/validation/check-username';
+const CHECK_MAIL_URL = '/api/v1/validation/check-email';
+
 const RegistWindow = ({onClose}) => {
   const userRef = useRef();
   const mailRef = useRef();
@@ -17,9 +20,13 @@ const RegistWindow = ({onClose}) => {
   const [validName, setValidName] = useState(false);
   const [userFocus, setUserFocus] = useState(false);
 
+  const [userAvailable, setUserAvailable] = useState(false);
+
   const [mail, setMail] = useState('')
   const [validMail, setValidMail] = useState(false);
   const [mailFocus, setMailFocus] = useState(false);
+
+  const [mailAvailable, setMailAvailable] = useState(false);
 
   const [pwd, setPwd] = useState('')
   const [validPwd, setValidPwd] = useState(false);
@@ -31,24 +38,100 @@ const RegistWindow = ({onClose}) => {
 
   const [errMsg, setErrMsg] = useState('');
   const [success, setSuccess] = useState(false);
+  const checkUsername = async(user) => {
+    if(!user){
+      return;
+    }
+      try{
+        const response = await fetch(`${CHECK_USERNAME_URL}?username=${user}`);
+
+        if(!response.ok){
+          throw new Error(`HTTP Error! status: ${response.status}`);
+        }
+        const jsonResponse = await response.json();
+        const isAvailable = jsonResponse.data;
+
+        if(isAvailable){
+          setUserAvailable(true);
+        }
+        else{
+          setUserAvailable(false);
+          setErrMsg('');
+        }
+      }
+      catch(e){
+        console.error("Failed to check username", e);
+        setErrMsg('Ошибка проверки логина. Попробуйте позже.');
+        setUserAvailable(false);
+      }
+  }
+  const checkMail = async(mail) => {
+    if(!mail){
+      return;
+    }
+      try{
+        const response = await fetch(`${CHECK_MAIL_URL}?email=${mail}`);
+
+        if(!response.ok){
+          throw new Error(`HTTP Error! status: ${response.status}`);
+        }
+        const jsonResponse = await response.json();
+        const isAvailable = jsonResponse.data;
+
+        if(isAvailable){
+          setMailAvailable(true);
+        }
+        else{
+          setMailAvailable(false);
+          setErrMsg('');
+        }
+      }
+      catch(e){
+        console.error("Failed to check email", e);
+        setErrMsg('Ошибка проверки почты. Попробуйте позже.');
+        setMailAvailable(false);
+      }
+    }
 
   useEffect( () => {
     userRef.current.focus();
   }, [])
 
-
   useEffect( () => {
-    const result = USER_REGEX.test(user);
-    console.log(result);
+    const isValid = USER_REGEX.test(user);
+    setValidName(isValid);
+    console.log(isValid);
     console.log(user);
-    setValidName(result);
+    console.log(userAvailable);
+    if (user === '') {
+        setUserAvailable(false); 
+        return; 
+    }
+    if(isValid && user){
+      const delayCheck = setTimeout(() => {
+              checkUsername(user);
+      })
+      return () => clearTimeout(delayCheck);
+    }
+   
   }, [user])
 
   useEffect( () => {
-    const result = MAIL_REGEX.test(mail);
-    console.log(result);
+    const isValid = MAIL_REGEX.test(mail);
+    console.log(isValid);
+    setValidMail(isValid);
     console.log(mail);
-    setValidMail(result);
+    console.log(mailAvailable)
+    if(mail === ''){
+      setMailAvailable(false);
+      return;
+    }
+    if (isValid && mail){
+      const delayCheck = setTimeout(() => {
+        checkMail(mail);
+      })
+      return () => clearTimeout(delayCheck);
+    }
   }, [mail])
 
   useEffect( () => {
@@ -108,27 +191,38 @@ const RegistWindow = ({onClose}) => {
                 пароль: 
               </label>
             </div>
-            <div className={styles["inputFields"]}>
-              <div className={styles["loginBlock"]}>
-                 <input 
-                 type= "text"
-                 id = 'username'
-                 ref={userRef}
-                 autoComplete = 'off'
-                 onChange= {(e) => setUser(e.target.value)}
-                 required
-                 aria-invalid = {validName ? "false" : "true"}
-                 aria-describedby = 'uidnote'
-                 onFocus={() => setUserFocus(true)}
-                 onBlur={() => setUserFocus(false)}
-                 className={styles["loginInput"]}
-                 />
-                <p id= 'uidnote' className={userFocus && user && !validName ? styles['instructions'] : styles['offscreen']}>
-                  от 6 до 16 символов.
-                  Должно начинаться с буквы.<br/>
-                  Латинские буквы, числа, _, - разрешены
-                </p>
-              </div>
+              <div className={styles["inputFields"]}>
+                <div className={styles["loginBlock"]}>
+                  <input 
+                  type= "text"
+                  id = 'username'
+                  ref={userRef}
+                  autoComplete = 'off'
+                  onChange= {(e) => setUser(e.target.value)}
+                  required
+                  aria-invalid = {!validName || (validName && !userAvailable) ? "true" : "false"}
+                  aria-describedby = {
+                    !validName ?
+                    'nonValidName'
+                    :
+                    validName && !userAvailable ?
+                    'existingName'
+                    :
+                    undefined
+                }
+                  onFocus={() => setUserFocus(true)}
+                  onBlur={() => setUserFocus(false)}
+                  className={styles["loginInput"]}
+                  />
+                  <p id= 'nonValidName' className={userFocus && user && !validName ? styles['instructions'] : styles['offscreen']}>
+                    от 6 до 16 символов.
+                    Должно начинаться с буквы.<br/>
+                    Латинские буквы, числа, _, - разрешены
+                  </p>
+                   <p id= 'existingName' className={userFocus && user && validName && !userAvailable ? styles['instructions'] : styles['offscreen']}>
+                    Пользователь с таким логином уже существует в системе
+                  </p>
+                </div>
               <div className={styles["mailBlock"]}>
                 <input 
                  type= "text"
@@ -137,15 +231,24 @@ const RegistWindow = ({onClose}) => {
                  autoComplete = 'off'
                  onChange= {(e) => setMail(e.target.value)}
                  required
-                 aria-invalid = {validMail ? "false" : "true"}
-                 aria-describedby = 'midnote'
+                 aria-invalid = {!validMail || (validMail && !mailAvailable) ? "true" : "false"}
+                 aria-describedby = {
+                  !validName ? 'nonValueMail' 
+                  : 
+                  !mailAvailable ? 'existingMail'
+                  :
+                  undefined
+                 }
                  onFocus={() => setMailFocus(true)}
                  onBlur={() => setMailFocus(false)}
                  className={styles["mailInput"]}
                  />
-                <p id= 'midnote' className={mailFocus && mail && !validMail ? styles['instructions'] : styles['offscreen']}>
+                <p id= 'nonValueMail' className={mailFocus && mail && !validMail ? styles['instructions'] : styles['offscreen']}>
                   Неверный формат электронной почты. <br/>
                   Адрес должен содержать символ @ и  домен.
+                </p>
+                <p id= 'existingMail' className={mailFocus && mail && validMail && !mailAvailable ? styles['instructions'] : styles['offscreen']}>
+                  Пользователь с данной почтой уже зарегистрирован в системе.
                 </p>
                 
               </div>
@@ -188,7 +291,7 @@ const RegistWindow = ({onClose}) => {
           </div>
           <Button 
           type = "submit"
-          disabled={!validName || !validMail || !validPwd || !validMatch ? true : false} 
+          disabled={!validName || !userAvailable || !validMail || !mailAvailable || !validPwd || !validMatch ? true : false} 
           buttonName={'продолжить'} />
           </form>
       )}

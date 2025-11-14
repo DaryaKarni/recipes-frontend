@@ -204,3 +204,13 @@
   margin-bottom: 5vh;
   gap: 1vh;
 }
+.errMsg{
+   display: flex;
+ 
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+  
+    color: $color-red;
+    z-index: 1001; 
+}
