@@ -209,7 +209,6 @@ const RegistWindow = ({onClose}) => {
         <form onSubmit={handleSubmit} className={styles["formBlock"]}>
     <p ref={errRef} className= {errMsg ? "errMsg" : 
       "offscreen"} aria-live="assertive">{errMsg}</p>
-  
       
           <div className={styles["fields"]}>
             <div className={styles["columnNames"]}>
