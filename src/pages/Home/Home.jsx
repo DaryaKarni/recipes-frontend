@@ -128,7 +128,7 @@ const Home = () => {
     <div className={styles.home}>
       <div className={styles["day-recipe"]}>
         <div className={styles["recipe"]}>
-          {dayRecipe && <img src={`/uploads/${dayRecipe.image}`} alt="" className={styles["imageRecipe"]}/>}
+          {dayRecipe && <img src={`/uploads/recipes/${dayRecipe.image}`} alt="" className={styles["imageRecipe"]}/>}
           <div className={styles['info']}>
             <p className={styles['name']}>
               {dayRecipe && dayRecipe.title}

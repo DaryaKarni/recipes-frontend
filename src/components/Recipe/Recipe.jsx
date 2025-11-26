@@ -63,7 +63,7 @@ const Recipe = ({recipe}) => {
           </p>
         </div>
         <div className={styles["cardImage"]}>
-          <img src={`/uploads/${recipe.image}`} alt="" className={styles["image"]}/>
+          <img src={`/uploads/recipes/${recipe.image}`} alt="" className={styles["image"]}/>
         </div>
         <div className={styles["ratingInfo"]}>
           <img src={heart}/>

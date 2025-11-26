@@ -27,7 +27,7 @@ const RecipeCard = ({recipe, isSmall, isFavorite = false}) => {
     <div className={cardClasses} onClick={HandleCardClick}>
       <div className={styles['frame']}>
         <div className={styles['image-container']}>
-          <img src={`/uploads/${recipe.image}`} alt={recipe.title} className={styles["image"]}/>
+          <img src={`/uploads/recipes/${recipe.image}`} alt={recipe.title} className={styles["image"]}/>
           <div className={styles['favorite']} onClick={HandleLikeToggle}>
             <img src={heartIcon} alt="" className={styles.heart}/>
           </div>
