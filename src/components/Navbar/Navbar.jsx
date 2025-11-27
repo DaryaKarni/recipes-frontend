@@ -6,17 +6,20 @@ import RegistWindow from '../RegistWindow/RegistWindow';
 import SignInWindow from '../SignInWindow/SignInWindow';
 import AuthContext from '../../context/AuthProvider';
 import LogoutWindow from '../LogoutWindow/LogoutWindow';
+import {Link, useNavigate} from 'react-router-dom'
 
 import avatar from '../../assets/ratatouille.svg'
 
 //import {Link} from 'react-router-dom'
 
-const Navbar = ({onOpenLogin}) => {
+const Navbar = () => {
   const {auth, setAuth} = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     setAuth({ user: null, role: null, accessToken: null });
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem('token');
+    navigate('/');
   }
 
   const isAdmin = Array.isArray(auth?.roles) 
@@ -43,19 +46,21 @@ const Navbar = ({onOpenLogin}) => {
   return (
     <div className={styles.navbar}>
       <div className={styles['home-bar']}>
-        <a href="/" className={styles['recipies-home']}>recipies</a>
+        <Link to="/" className={styles['recipies-home']}>recipies</Link>
       </div>
       <div className={styles['search-box']}>
         <input type="text" placeholder={searchName}/>
         <img src={search_icon} alt="" className={styles['search-icon']}/> 
       </div>
       {auth?.token ? (
-        <ul className={styles["userPanel"]}>
+        <ul className={styles["userPanel"]}> 
           <li className={styles["userInfo"]}>
             {auth.user}
-            <div className={styles["avatarFrame"]}>
-              <img src={avatar} className={styles["avatarImg"]}/>
-            </div>
+            <Link to="/profile">
+              <div className={styles["avatarFrame"]}>
+               <img src={avatar} className={styles["avatarImg"]}/>{/* надо вытянуть аватар`/uploads/avatars/${auth.user.}`*/}
+              </div>
+            </Link>
           </li>
             <img src={line_sign_in} alt="" className={styles['line-sign-in']}/>
             <li onClick={openLogout} className={styles['signOut']}>{signOutRus}</li>

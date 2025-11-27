@@ -135,7 +135,10 @@ const Recipe = ({recipe}) => {
               />
               </div>
              <div className={styles["button"]}>
-              <Button buttonName = {'отправить'} />
+              <Button 
+        
+              buttonName = {'отправить'} 
+              />
               </div>
             </div>
             <div className={styles["comments"]}>

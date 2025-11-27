@@ -15,8 +15,8 @@ const LogoutWindow = ({onClose, onButton}) => {
           type='button'
           buttonName='Да'
           onClick={()=> {
-            {onButton}
-            {onClose}
+            onButton();
+            onClose();
           }}
           />
           <Button
