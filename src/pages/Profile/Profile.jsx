@@ -1,20 +1,11 @@
 import styles from './Profile.module.scss'
-import defaultPhoto from '../../assets/profile-photo-default.svg'
+
 import editIcon from '../../assets/edit-icon.svg'
 import BlocksRecipe from '../../components/BlocksRecipe/BlocksRecipe';
 import AuthContext  from '../../context/AuthProvider';
 import { useContext, useEffect, useState } from 'react';
 
-// const NewRecipesData = [
-//   { id: 1, authorUsername: 'kinkate', name: 'пельмешки', image: dumplings, meal: 'обед', time: '10 минут', rating: 5},
-//   { id: 2, authorUsername: 'modory', name: 'запечённая рыба', image: fish, meal: 'ужин', time: '90 минут', rating: 3 },
-//   { id: 3, authorUsername: 'modory', name: 'хачапури по-аджарски и что то там ещё вкусное', image: khachapuri, meal: 'ужин', time: '45 минут', rating: 4 },
-//   { id: 4, authorUsername: 'kinkate', name: 'пельмешки', image: dumplings, meal: 'обед', time: '10 минут', rating: 5},
-//   { id: 5, authorUsername: 'kinkate', name: 'пельмешки', image: dumplings, meal: 'обед', time: '10 минут', rating: 5},
-//   { id: 6, authorUsername: 'kinkate', name: 'пельмешки', image: dumplings, meal: 'обед', time: '10 минут', rating: 5},
-  
-  
-// ];
+
 const MY_RECIPES_URL = '/api/v1/recipes/my-recipes';
 const Profile = () => {
   const {auth} = useContext(AuthContext);
@@ -23,7 +14,8 @@ const Profile = () => {
   const [myRecipes, setMyRecipes] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [propose, setPropose] = useState(false)
+  const [propose, setPropose] = useState(null);
+  const proposeTextRus = 'Создайте свой первый рецепт';
 
   useEffect (() => {
     const fetchMyRecipes = async() => {
@@ -36,7 +28,7 @@ const Profile = () => {
       try{
         setIsLoading(true);
         setError(null);
-        setPropose(false);
+        setPropose(null);
         const response = await fetch(MY_RECIPES_URL,{
           method: 'GET',
           headers: {
@@ -53,8 +45,9 @@ const Profile = () => {
         const jsonResponse = await response.json();
         const myRecipesArray = jsonResponse.data;
         setMyRecipes(myRecipesArray);
+        console.log({myRecipes});
         if(myRecipesArray && myRecipesArray.length === 0){
-          setPropose(true);
+          setPropose(proposeTextRus);
         }
       }
       catch(e){
@@ -83,7 +76,7 @@ const Profile = () => {
           </div>
         
           <div className={styles["imageFrame"]}>
-            <img src={defaultPhoto} className={styles["photo"]}/>
+            {auth.avatar && <img src={`/uploads/avatars/${auth.avatar}`} className={styles["photo"]}/>}
           </div>
           <img src={editIcon} className={styles["editIcon"]}></img>
         </div>
@@ -91,8 +84,8 @@ const Profile = () => {
 
           <p className={styles["title"]}>Мои рецепты</p>
           {isLoading && <p>Загрузка ваших рецептов...</p>}
-          {error && <p className={styles.error}>{error}</p>}
-          {!isLoading && !error && propose && (<p>Создайте свой первый рецепт</p>)}
+          {error && <p className={styles["error"]}>{error}</p>}
+          {!isLoading && !error && propose && <p>{propose}</p>}
           <div className={styles["recipesBlock"]}>
             {!isLoading && !error && myRecipes && myRecipes.length > 0 && (<BlocksRecipe data={myRecipes} isFavoriteSection={false}/>) }
           </div>

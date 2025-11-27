@@ -32,16 +32,19 @@
      
       .imageFrame{
         width: 20vw;
+        height: 20vw;
         display: flex;
-        width: fit-content;
+        //width: fit-content;
         align-items: center;
         justify-content: center;
         background-color: $color-gray-dark;
-        padding: 0.6vw;
+        padding: 0.3vw;
         border-radius: 50%;
         
         .photo{
-          width: 16vw;
+          width: 18vw;
+          object-fit:cover;
+          border-radius: 30rem;
         }
       }
       .editIcon{

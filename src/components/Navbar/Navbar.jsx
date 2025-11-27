@@ -58,7 +58,7 @@ const Navbar = () => {
             {auth.user}
             <Link to="/profile">
               <div className={styles["avatarFrame"]}>
-               <img src={avatar} className={styles["avatarImg"]}/>{/* надо вытянуть аватар`/uploads/avatars/${auth.user.}`*/}
+               {auth.avatar && <img src={`/uploads/avatars/${auth.avatar}`} className={styles["avatarImg"]}/>}{/* надо вытянуть аватар`/uploads/avatars/${auth.user.}`*/}
               </div>
             </Link>
           </li>

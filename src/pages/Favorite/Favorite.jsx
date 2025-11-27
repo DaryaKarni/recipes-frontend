@@ -1,29 +1,69 @@
 import styles from './Favorite.module.scss'
-import RecipeCard from '../../components/RecipeCard/RecipeCard'
-
-import dumplings from '../../assets/fake-recipes-images/dumplings.svg';
-import fish from '../../assets/fake-recipes-images/fish.svg';
-import khachapuri from '../../assets/fake-recipes-images/khachapuri.svg';
 import BlocksRecipe from '../../components/BlocksRecipe/BlocksRecipe';
+import { useContext, useEffect, useState } from 'react';
+import AuthContext from '../../context/AuthProvider';
+import axios from 'axios';
 
-const NewRecipesData = [
-  { id: 1, name: 'пельмешки', image: dumplings, meal: 'обед', time: '10 минут', rating: 5},
-  { id: 2, name: 'запечённая рыба', image: fish, meal: 'ужин', time: '90 минут', rating: 3 },
-  { id: 3, name: 'хачапури по-аджарски и что то там ещё вкусное', image: khachapuri, meal: 'ужин', time: '45 минут', rating: 4 },
-  { id: 4, name: 'пельмешки', image: dumplings, meal: 'обед', time: '10 минут', rating: 5},
-  { id: 5, name: 'пельмешки', image: dumplings, meal: 'обед', time: '10 минут', rating: 5},
-  { id: 6, name: 'пельмешки', image: dumplings, meal: 'обед', time: '10 минут', rating: 5},
-  
-];
+
+const FAV_URL = '/api/v1/recipes/favourites';
+
 const Favorite = () => {
+  const {auth} = useContext(AuthContext);
+  const token = auth?.token;
+  const [favData, setFavData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [propose, setPropose] = useState(null);
+  const proposeTextRus = 'Начните добавлять любимые рецепты!';
+  useEffect (() => {
+    const fetchFav = async() =>{
+      if(!token){
+        isLoading(false);
+        setFavData(null);
+        setError("Для просмотра любимых рецептов войдите в сестему");
+      }
+      try{
+        setError(null);
+        setIsLoading(true);
+        setPropose(null);
+        const response = await axios.get(FAV_URL, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const myFavArray = response.data.data;
+        setFavData(myFavArray);
+        console.log(myFavArray);
+        if(myFavArray && myFavArray.length === 0){
+          setPropose(proposeTextRus);
+          console.log(propose);
+        }
+      }
+      catch(e){
+        if(axios.isAxiosError(e) && e.response?.status === 401){
+          console.warn('Fav recipes fetch failed: Token expired. Forcing logout');
+          // вызвать здесь полный logout, если токен истек
+        }
+        console.error('Failed to fetch avatar', e);
+      }
+      finally{
+        setIsLoading(false);
+      }
+    }
+    if(token){
+      fetchFav();
+    }
+  }, [token]);
   return (
     <div className={styles.favorite}>
       <div className={styles["fav-recipes-title"]}>
         <p> My favorite </p>
       </div> 
-
+      {isLoading && <p>Загрузка ваших любимых рецептов...</p>}
+      {error && <p className={styles["error"]}>{error}</p>}
+      {!isLoading && !error && propose && <p>{propose}</p>}
       <div className={styles["fav-recipes"]}>
-        <BlocksRecipe data={NewRecipesData} isFavoriteSection={true}/>
+        {favData && !isLoading && !error && favData.length > 0 && <BlocksRecipe data={favData} isFavoriteSection={true}/>}
       </div>  
     </div>
   )
