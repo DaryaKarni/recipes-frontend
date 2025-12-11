@@ -38,6 +38,7 @@
             font-size: clamp(0.7rem, 1.0vw, 16px) !important;
           }
           .rating {
+        
             img {
               width: 21%;
               height: auto;
@@ -100,10 +101,10 @@
     .image-container{
       display: flex;
       width:100%;
-      height: auto;
+      height: 100%;
       position: relative;
       border-radius: 4vw;
-        flex: 1;
+      flex: 1;
       
       .image{
         display: flex;
@@ -134,7 +135,7 @@
       justify-content: center;
       margin-bottom: 4vh;
       margin-top: 2vh;
-      gap: 20%;
+      gap: 15%;
       
       .name{
         width: 100%;
@@ -147,7 +148,7 @@
         padding-left: 6%;
 
         p{
-        font-size: clamp(1rem, 1.8vw, 24px);
+        font-size: clamp(0.9rem, 1.8vw, 24px);
         font-weight: bold;
         white-space: nowrap;
         overflow: hidden;
@@ -156,32 +157,68 @@
       }
       
       .content{
-        display: flex;
+        //display: flex;
         padding-left: 12%;
         padding-right: 12%;
         width:100%;
-        flex-direction:row;
-        width: 100%;
-        align-items: flex-end;
+        //flex-direction:row;
+     
+        //align-items: flex-end;
         text-wrap: nowrap;
-        gap: 8%;
+        
+        display: grid;
+  /* Одна колонка, одна строка. Оба элемента попадут сюда */
+        grid-template-columns: 1fr;
         
         .text{
-          flex-direction: column;
+          //flex-direction: column;
           text-align: left;
           font-size: clamp(0.9rem, 1.4vw, 20px);
           flex:1;
+          grid-column: 1;
+          grid-row: 1;
+          // align-self: start;
+          display: flex;
+          flex-direction: column;
+          //gap: 20%; 
+
+          //justify-self: start;
+         // line-height: 1.4;
+          //z-index: 1;
+          
+          
+          .meal{
+            margin-bottom: 2%;
+          }
+          .time{
+            margin-bottom: 2%;
+          }
         }
         .rating{
-          display: flex;
-          align-self: flex-end;
+          //display: flex;
+          //align-self: flex-end;
           margin-left:auto;
-          flex-wrap: nowrap;
-          
+          //flex-wrap: nowrap;
+          //flex-shrink: 0;
+          //position: absolute;
+          //right: 0;
+          //bottom: 0;
+       
+          grid-column: 1;
+          grid-row: 1;
+           vertical-align: middle;
+          align-self: end;    /* Аналог bottom: 0 */
+          justify-self: end;
+          z-index: 2; /* Звёзды выше */
+          white-space: nowrap;
+         // min-width: 0; 
+          width: 60%;
           img{
             width: 20%;
             height: auto;
-          }
+            max-width: 100%;
+            
+          } 
         }
       }
     }
@@ -193,7 +230,10 @@
   
       .content{
           .text{
-            font-size: clamp(0.8rem, 1vw, 1.5rem) ;
+            font-size: clamp(0.7rem, 1vw, 1.5rem) ;
+          }
+          .rating{
+            width: 55%;
           }
         }
     }
@@ -235,13 +275,13 @@
         padding-left: 6%;
         
         p{
-          font-size: clamp(1rem, 3vw, 2rem);
+          font-size: clamp(0.9rem, 3vw, 2rem);
         }
         
       }
       .content{
           .text{
-            font-size: clamp(0.9rem, 2vw, 1.5rem) ;
+            font-size: clamp(0.7rem, 2vw, 1.5rem) ;
           }
         }
       
