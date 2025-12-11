@@ -3,11 +3,12 @@ import BlocksRecipe from '../../components/BlocksRecipe/BlocksRecipe';
 import { useContext, useEffect, useState } from 'react';
 import AuthContext from '../../context/AuthProvider';
 import axios from 'axios';
-
+import { useTranslation } from 'react-i18next';
 
 const FAV_URL = '/api/v1/recipes/favourites';
 
 const Favorite = () => {
+  const {t} = useTranslation();
   const {auth} = useContext(AuthContext);
   const token = auth?.token;
   const [favData, setFavData] = useState(null);
@@ -57,7 +58,7 @@ const Favorite = () => {
   return (
     <div className={styles.favorite}>
       <div className={styles["fav-recipes-title"]}>
-        <p> My favorite </p>
+        <p>{t("myFav_title")}</p>
       </div> 
       {isLoading && <p>Загрузка ваших любимых рецептов...</p>}
       {error && <p className={styles["error"]}>{error}</p>}

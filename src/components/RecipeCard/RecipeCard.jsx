@@ -4,6 +4,7 @@ import heartFilled from '../../assets/like-heart-filled.svg'
 import heartEmpty from '../../assets/like-heart-empty.svg'
 
 import { useNavigate } from 'react-router-dom'
+
 import StarRating from '../StarRating'
 
 const RecipeCard = ({recipe, isSmall, isFavorite = false}) => {

@@ -1,7 +1,9 @@
+import { useTranslation } from 'react-i18next';
 import styles from './Comment.module.scss'
 import {useRef, useEffect, useState} from 'react'
 
 const Comment = ({authorUsername, initialText, isPersonal}) => {
+  const {t} = useTranslation();
   const [commentText, setCommentText] = useState('');
   const textareaRef = useRef(null);
 
@@ -20,7 +22,7 @@ const Comment = ({authorUsername, initialText, isPersonal}) => {
     }, [commentText, isPersonal]);  
 
   const addressUser = () => {
-    return isPersonal ? 'Вы: ' : 'Пользователь: ';
+    return isPersonal ? t("you"): t("user");
   };
 
   const handleChange = (e) => {

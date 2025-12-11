@@ -1,19 +1,18 @@
 import styles from './Catalog.module.scss'
 import heart_icon from '../../assets/fav-heart-icon.svg'
 import {Link} from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const Catalog = () => {
-  const popularRus = "Популярное";
-  const categoriesRus = "Категории";
-  const favoriteRus = "Избранное";
+  const {t} = useTranslation();
   return (
     <ul className={styles.catalog}>
       
-        <Link to="/popular">{popularRus}</Link>
-        <li>{categoriesRus}</li>
+        <Link to="/popular">{t("popular_title")}</Link>
+        <li>{t("category_title")}</li>
         <Link to="/favorite" className={styles['favourites']}>
           <img src={heart_icon} alt="" className={styles['heart-icon']}></img> 
-          {favoriteRus}
+          {t("favorite_title")}
         </Link>
      
     </ul>

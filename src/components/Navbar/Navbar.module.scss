@@ -16,7 +16,10 @@
       text-decoration: underline;
     }
   }
-
+  .nav-actions{
+    display: flex;
+    align-items: center;
+    gap: 3vw;
   .userPanel{
     display: flex;
     list-style: none;
@@ -45,6 +48,7 @@
     .signOut{
       cursor: pointer;
     }
+    
   }
   .sign-in{
     display: flex;
@@ -56,6 +60,24 @@
       cursor:pointer;
     }
   }
+  .button-lang{
+    display: flex;
+    align-items: center;
+    aspect-ratio: 4/3;
+    height: 60%;
+    width: auto;
+    background-color: $color-white;
+    border: 1px solid $color-gray-dark;
+    border-radius: 20vmin;
+    padding: 1.5vmin;
+    font-size: clamp(1.2rem, 1.8vw, 20px);
+    cursor: pointer;
+    &:hover{
+    background: $color-gray-light;
+    }
+  }
+  
+}
 
   .home-bar{
     display: flex;
@@ -89,6 +111,7 @@
       cursor:pointer;
     }
   }
+  
  
   @media(max-width: 1024px) {
         padding: 18px 5%; 

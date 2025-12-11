@@ -7,6 +7,7 @@ import dumplings from '../../assets/fake-recipes-images/dumplings.svg';
 import fish from '../../assets/fake-recipes-images/fish.svg';
 import khachapuri from '../../assets/fake-recipes-images/khachapuri.svg';
 import Button from '../../components/Button/Button';
+import { useTranslation } from 'react-i18next';
 
 import {useState, useEffect } from 'react'
 import { useNavigate} from 'react-router-dom';
@@ -23,7 +24,9 @@ const DayRecipeData = [
 
 const Home = () => {
   //const dayRecipe = DayRecipeData[0];
-  
+  const {t} = useTranslation();
+
+
   const navigate = useNavigate();
 
 
@@ -122,8 +125,6 @@ const Home = () => {
     return <div className={styles.home}><p style={{textAlign: 'center', padding: '50px'}}>Рецепт дня не доступен. 😔</p></div>;
   }
 
-  const dayRecipeTitle = "Рецепт дня";
-  const newRecipesTitle = "Новейшие рецепты";
   return (
     <div className={styles.home}>
       <div className={styles["day-recipe"]}>
@@ -136,18 +137,18 @@ const Home = () => {
             <p className={styles['description']}>
               {dayRecipe && dayRecipe.description}
             </p>
-            <Button buttonName={'to recipe'} className={styles["button"]} onClick={HandleClickToRecipe}/>
+            <Button buttonName={t("button_toRecipe")} className={styles["button"]} onClick={HandleClickToRecipe}/>
           </div>
 
         </div>
         <div className={styles["background"]}>
           <img src={background} alt=""></img>
-          <p className={styles["title"]}>{dayRecipeTitle}</p>
+          <p className={styles["title"]}>{t("dayRecipe_title")}</p>
         </div>
       </div>
 
       <div className={styles["new-recipes-title"]}>
-        {newRecipesTitle}
+        {t("newRecipes_title")}
       </div>
 
       <div className={styles["new-recipes"]}>

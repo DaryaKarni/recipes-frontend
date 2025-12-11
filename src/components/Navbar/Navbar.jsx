@@ -7,6 +7,8 @@ import SignInWindow from '../SignInWindow/SignInWindow';
 import AuthContext from '../../context/AuthProvider';
 import LogoutWindow from '../LogoutWindow/LogoutWindow';
 import {Link, useNavigate} from 'react-router-dom'
+import {useTranslation} from 'react-i18next'
+import { useLanguageSync } from '../../context/useLanguageSync';
 
 import avatar from '../../assets/ratatouille.svg'
 
@@ -15,6 +17,13 @@ import avatar from '../../assets/ratatouille.svg'
 const Navbar = () => {
   const {auth, setAuth} = useContext(AuthContext);
   const navigate = useNavigate();
+  const {t} = useTranslation();
+
+  const {nextLang, syncLanguageWithBackend} = useLanguageSync();
+
+  const handleLanguageToggle = () => {
+    syncLanguageWithBackend(nextLang);
+  }
 
   const handleLogout = () => {
     setAuth({ user: null, role: null, accessToken: null });
@@ -49,9 +58,10 @@ const Navbar = () => {
         <Link to="/" className={styles['recipies-home']}>recipies</Link>
       </div>
       <div className={styles['search-box']}>
-        <input type="text" placeholder={searchName}/>
+        <input type="text" placeholder={t('search_title')}/>
         <img src={search_icon} alt="" className={styles['search-icon']}/> 
       </div>
+      <div className={styles["nav-actions"]}>
       {auth?.token ? (
         <ul className={styles["userPanel"]}> 
           <li className={styles["userInfo"]}>
@@ -63,7 +73,7 @@ const Navbar = () => {
             </Link>
           </li>
             <img src={line_sign_in} alt="" className={styles['line-sign-in']}/>
-            <li onClick={openLogout} className={styles['signOut']}>{signOutRus}</li>
+            <li onClick={openLogout} className={styles['signOut']}>{t('button_logout')}</li>
             {isLogoutOpen &&
              <LogoutWindow 
             onClose={closeLogout}
@@ -71,14 +81,18 @@ const Navbar = () => {
         </ul>
       ) : (
       <ul className={styles['sign-in']}>
-        <li onClick={openRegist}>{registName}</li>
+        <li onClick={openRegist}>{t('button_registrate')}</li>
         {isRegistOpen && <RegistWindow onClose={closeRegist}/>}
         <img src={line_sign_in} alt="" className={styles['line-sign-in']}/>
-        <li onClick={openSignIn}>{signInName}</li>
+        <li onClick={openSignIn}>{t('button_login')}</li>
         {isSignInOpen && <SignInWindow onClose={closeSignIn}/>}
       </ul>
       )}
-        
+      <button 
+      className={styles['button-lang']}
+      onClick={handleLanguageToggle}
+      >{t('button_lang')}</button>
+      </div>
     </div>
   )
 }
