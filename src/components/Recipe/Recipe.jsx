@@ -107,7 +107,7 @@ const Recipe = ({recipe}) => {
              <div className={styles["button"]}>
               <Button 
         
-              buttonName = {t("send")}
+              buttonName = {t("send_comment")}
               />
               </div>
             </div>
