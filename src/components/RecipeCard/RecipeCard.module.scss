@@ -34,8 +34,10 @@
           }
         }
         .content {
+          
           .text {
             font-size: clamp(0.7rem, 1.0vw, 16px) !important;
+            text-align: left;
           }
           .rating {
         
@@ -174,14 +176,14 @@
           //flex-direction: column;
           text-align: left;
           font-size: clamp(0.9rem, 1.4vw, 20px);
-          flex:1;
+          //flex:1;
           grid-column: 1;
           grid-row: 1;
           // align-self: start;
           display: flex;
           flex-direction: column;
           //gap: 20%; 
-
+          align-items: flex-start; 
           //justify-self: start;
          // line-height: 1.4;
           //z-index: 1;
