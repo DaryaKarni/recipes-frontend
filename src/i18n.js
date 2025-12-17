@@ -50,6 +50,9 @@ const resources = {
       "unavailable_dayRecipe": "Recipe of the day is unavailable",
       "loading_newRecipes": "Loading latest recipes...",
       "unavailable_newRecipes": "Latest recipes are unavailable",
+
+      "popular_title": "Popular",
+      "loading_popular": "Loading popular",
     }
   },
   ru: {
@@ -98,6 +101,9 @@ const resources = {
       "unavailable_dayRecipe": "Рецепт дня не доступен.",
       "loading_newRecipes": "Загрузка новейших рецептов...",
       "unavailable_newRecipes": "Новейшие рецепты не доступны.",
+
+      "popular_title": "Популярное",
+      "loading_popular": "Загрузка популярного...",
     }
   }
 };
@@ -111,12 +117,11 @@ i18n
 
     //Настройка детектора языка (для автоматического выбора)
     detection: {
-      order: ['cookie', 'localStorage', 'navigator'], 
-      caches: ['cookie', 'localStorage'], 
+      order: ['cookie'], 
+      caches: ['cookie'], 
       //Название cookie, которое соответствует вашему бэкенду
-      cookieOptions: { name: 'lang', sameSite: 'strict' }, 
-      //Название ключа в LocalStorage
-      lookupLocalStorage: 'i18nextLng',
+      lookupCookie: 'lang', // Имя куки (как вы хотели в задании key="lang")
+      cookieMinutes: 10080,
     },
 
     interpolation: {

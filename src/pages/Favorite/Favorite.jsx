@@ -19,7 +19,7 @@ const Favorite = () => {
   useEffect (() => {
     const fetchFav = async() =>{
       if(!token){
-        isLoading(false);
+        setIsLoading(false);
         setFavData(null);
         setError("Для просмотра любимых рецептов войдите в сестему");
       }
@@ -44,7 +44,6 @@ const Favorite = () => {
         if(axios.isAxiosError(e) && e.response?.status === 401){
           console.warn('Fav recipes fetch failed: Token expired. Forcing logout');
         }
-        console.error('Failed to fetch avatar', e);
       }
       finally{
         setIsLoading(false);

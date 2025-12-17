@@ -1,14 +1,14 @@
 @use '../../styles/abstracts/variables' as *;
 
-.favorite{
+.popular{
  display: flex;
   width: 100%;
   font-family: $font-stack;
   flex-direction: column;
   height: 100%; 
-  min-height: 75vh;
+  min-height: 80vh;
   background-color: $color-white;
-  .fav-recipes-title{
+  .popular-recipes-title{
     background-color: $color-white;
     text-align:center;
     font-size: $font-title-adap-size;

@@ -101,7 +101,7 @@ const Home = () => {
   }
 
   if (!newRecipes) {
-    return <div className={styles.home}><p style={{textAlign: 'center', padding: '50px'}}> 😔</p></div>;
+    return <div className={styles.home}><p style={{textAlign: 'center', padding: '50px'}}>{t("unavailable_newRecipes")} 😔</p></div>;
   }
 
   if (isNewLoading) {

@@ -49,43 +49,86 @@
         }
       }
     }
-  //    @media(max-width: 768px){
-  //     border-radius: clamp(2rem, 6vmin, 150px);
-  //     .frame{
-  //     border-radius: clamp(2rem, 5vmin, 100px);
-  //     .image-container{
-  //       .image{
-  //         border-radius: clamp(2rem, 3vmin, 80px);
-  //       }
-  //       .favorite{
-  //         top: 12%;
-  //         right: 12%;
-  //         img{
-  //           width:4vw;
-  //           height: auto;
-  //         }
-  //       }
-  //     }
-  //     .info {
-  //       .name {
-  //         p {
-  //           font-size: clamp(0.9rem, 1.2vw, 20px) !important;
-  //         }
-  //       }
-  //       .content {
-  //         .text {
-  //           font-size: clamp(0.7rem, 0.9vw, 16px) !important;
-  //         }
-  //         .rating {
-  //           img {
-  //             width: 22%;
-  //             height: auto;
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
+     @media(max-width: 768px){
+      border-radius: clamp(1rem, 6vmin, 150px);
+      .frame{
+      border-radius: clamp(1rem, 5vmin, 100px);
+      .image-container{
+        .image{
+          border-radius: clamp(1.1rem, 3vmin, 80px);
+          //height: 9vh;
+        }
+        .favorite{
+          top: 12%;
+          right: 12%;
+          img{
+            width:4vw;
+            height: auto;
+          }
+        }
+      }
+      .info {
+        margin-bottom: 3vh;
+        .name {
+          p {
+            font-size: clamp(0.6rem, 2vw, 20px) !important;
+          }
+        }
+        .content {
+          .text {
+            font-size: clamp(0.5rem, 1.8vw, 16px) !important;
+          }
+          .rating {
+            img {
+              width: 22%;
+              height: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media(max-width: 420px){
+      .frame{
+      .image-container{
+        .image{
+        }
+        .favorite{
+          top: 12%;
+          right: 12%;
+          img{
+            width:4vw;
+            height: auto;
+          }
+        }
+      }
+      .info {
+        margin-bottom: 2vh;
+        .name {
+          p {
+            font-size: clamp(0.6rem, 2vw, 20px) !important;
+          }
+        }
+        .content {
+          .text {
+            font-size: clamp(0.3rem, 2vw, 16px) !important;
+            .meal{
+            margin-bottom: 1%;
+          }
+            .time{
+              margin-bottom: 4%;
+            }
+          }
+          .rating {
+            img {
+              width: 20%;
+              height: auto;
+            }
+          }
+        }
+      }
+    }
+  }
   }
   
   .frame{

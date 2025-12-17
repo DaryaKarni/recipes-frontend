@@ -20,7 +20,6 @@
     const signInUser = async(data) => {
        
       try{
-        console.log('lets go');
         const response = await fetch(LOGIN_URL, {
           method: 'POST',
           headers: {
@@ -76,7 +75,7 @@
     }, [user, pwd])
     const handleSubmit = async(e) => {
       e.preventDefault();
-      const data = {username: user, password: pwd}
+      const data = {username: user, password: pwd}//, language: lng
       const result = await signInUser(data);
       console.log(result);
       if (result === true) {
