@@ -1,16 +1,14 @@
 import styles from'./Navbar.module.scss'
 import search_icon from '../../assets/search-icon.svg'
 import line_sign_in from '../../assets/line-sign-in.svg'
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import RegistWindow from '../RegistWindow/RegistWindow';
 import SignInWindow from '../SignInWindow/SignInWindow';
 import AuthContext from '../../context/AuthProvider';
 import LogoutWindow from '../LogoutWindow/LogoutWindow';
-import {Link, useNavigate} from 'react-router-dom'
+import {Link, useNavigate, useSearchParams, useLocation} from 'react-router-dom'
 import {useTranslation} from 'react-i18next'
 import { useLanguageSync } from '../../context/useLanguageSync';
-
-import avatar from '../../assets/ratatouille.svg'
 
 //import {Link} from 'react-router-dom'
 
@@ -20,6 +18,10 @@ const Navbar = () => {
   const {t} = useTranslation();
 
   const {nextLang, syncLanguageWithBackend} = useLanguageSync();
+  const [searchParams] = useSearchParams();
+  const [query, setQuery] = useState(searchParams.get("q") || "");
+
+  const location = useLocation();
 
   const handleLanguageToggle = () => {
     syncLanguageWithBackend(nextLang);
@@ -28,7 +30,7 @@ const Navbar = () => {
   const handleLogout = () => {
     setAuth({ user: null, role: null, accessToken: null });
     localStorage.removeItem('token');
-    navigate('/');
+    navigate(`/search?q=${encodeURIComponent(query.trim())}`);//
   }
 
   const isAdmin = Array.isArray(auth?.roles) 
@@ -47,19 +49,38 @@ const Navbar = () => {
   const openLogout = () => setIsLogoutOpen(true);
   const closeLogout= () => setIsLogoutOpen(false);
 
+  useEffect (() => {
+    if(location.pathname !== '/search'){
+      setQuery("");
+    }
+  }, [location.pathname]);
 
-  const searchName = "Поиск";
-  const registName = "Регистрация";
-  const signInName = "Вход";
-  const signOutRus = "Выход";
+
+  const handleSearch = (e) => {
+    if((e.key == "Enter" || e.type == 'click') && query.trim()){
+      const url = `/search?q=${encodeURIComponent(query.trim())}`;
+      navigate(url);
+    }
+  }
   return (
     <div className={styles.navbar}>
       <div className={styles['home-bar']}>
         <Link to="/" className={styles['recipies-home']}>recipies</Link>
       </div>
       <div className={styles['search-box']}>
-        <input type="text" placeholder={t('search_title')}/>
-        <img src={search_icon} alt="" className={styles['search-icon']}/> 
+        <input 
+        type="text" 
+        placeholder={t('search')}
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={handleSearch}
+        />
+        <img 
+        src={search_icon} 
+        alt="" 
+        className={styles['search-icon']}
+        onClick = {handleSearch}
+        /> 
       </div>
       <div className={styles["nav-actions"]}>
       {auth?.token ? (
@@ -95,6 +116,7 @@ const Navbar = () => {
       </div>
     </div>
   )
+
 }
 
 export default Navbar;

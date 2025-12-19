@@ -1,0 +1,21 @@
+@use '../../styles/abstracts/variables' as *;
+
+.search{
+ display: flex;
+  width: 100%;
+  font-family: $font-stack;
+  flex-direction: column;
+  height: 100%; 
+  min-height: 80vh;
+  background-color: $color-white;
+  .search-recipes-title{
+    background-color: $color-white;
+    text-align:center;
+    font-size: $font-title-adap-size;
+    padding: 1.1% 0;
+    border-bottom: 1px solid $color-yellow;
+  }
+  p{
+    text-align:center;
+  }
+}

@@ -5,7 +5,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 const resources = {
   en: {
     translation: {
-      "search_title": "Search",
+      "search": "Search",
       "button_registrate": "Registrate",
       "button_login": "Sign In",
       "button_lang": "Eng", //мб не надо
@@ -53,11 +53,18 @@ const resources = {
 
       "popular_title": "Popular",
       "loading_popular": "Loading popular",
+
+      "loading_recipe": "loading recipe...",
+      "error_recipe": "Recipe is not found",
+
+      "search_title": "Search results",
+      "loading_search": "Loading search results...",
+      "no_results": "No recipes found",
     }
   },
   ru: {
     translation: {
-      "search_title": "Поиск",
+      "search": "Поиск",
       "button_registrate": "Регистрация",
       "button_login": "Вход",
       "button_lang": "Рус", 
@@ -104,6 +111,13 @@ const resources = {
 
       "popular_title": "Популярное",
       "loading_popular": "Загрузка популярного...",
+
+      "loading_recipe": "Загрузка рецепта...",
+      "error_recipe": "Рецепт не найден",
+
+      "search_title": "Результаты поиска",
+      "loading_search": "Загрузка результатов поиска...",
+      "no_results": "Рецепты не найдены",
     }
   }
 };
