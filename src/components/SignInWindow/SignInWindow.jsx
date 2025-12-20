@@ -4,6 +4,7 @@
   import { useState, useRef, useEffect, useContext } from 'react'
   import AuthContext from '../../context/AuthProvider'
   import {jwtDecode} from 'jwt-decode'
+  import ReactDOM from 'react-dom'
 
   const LOGIN_URL = "/api/v1/auth/login"
 
@@ -85,7 +86,7 @@
         }, 1000);
       }
     }
-    return (
+    return ReactDOM.createPortal(
       
       <section>
         <p ref={errRef} className= {errMsg ? "errMsg" : 
@@ -133,7 +134,8 @@
         </div>
         
       </div>
-      </section>
+      </section>,
+      document.body
 
     )
   }

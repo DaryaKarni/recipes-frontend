@@ -2,9 +2,9 @@ import React from 'react'
 import Button from '../Button/Button'
 import styles from './LogoutWindow.module.scss'
 import cross from '../../assets/cross.svg'
-
+import ReactDOM from 'react-dom'
 const LogoutWindow = ({onClose, onButton}) => {
-  return (
+  return ReactDOM.createPortal(
     <div className={styles["window"]}>
       <div className={styles["frame"]}>
          <div className={styles["block"]}>
@@ -27,7 +27,8 @@ const LogoutWindow = ({onClose, onButton}) => {
           </div>
          </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 

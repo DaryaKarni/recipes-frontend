@@ -95,18 +95,18 @@ const Navbar = () => {
           </li>
             <img src={line_sign_in} alt="" className={styles['line-sign-in']}/>
             <li onClick={openLogout} className={styles['signOut']}>{t('button_logout')}</li>
-            {isLogoutOpen &&
+            {/* {isLogoutOpen &&
              <LogoutWindow 
             onClose={closeLogout}
-            onButton={handleLogout}/>}
+            onButton={handleLogout}/>} */}
         </ul>
       ) : (
       <ul className={styles['sign-in']}>
         <li onClick={openRegist}>{t('button_registrate')}</li>
-        {isRegistOpen && <RegistWindow onClose={closeRegist}/>}
+        {/* {isRegistOpen && <RegistWindow onClose={closeRegist}/>} */}
         <img src={line_sign_in} alt="" className={styles['line-sign-in']}/>
         <li onClick={openSignIn}>{t('button_login')}</li>
-        {isSignInOpen && <SignInWindow onClose={closeSignIn}/>}
+        {/*{isSignInOpen && <SignInWindow onClose={closeSignIn}/>}*/}
       </ul>
       )}
       <button 
@@ -114,6 +114,10 @@ const Navbar = () => {
       onClick={handleLanguageToggle}
       >{t('button_lang')}</button>
       </div>
+
+     {isRegistOpen && <RegistWindow onClose={closeRegist}/>}
+     {isSignInOpen && <SignInWindow onClose={closeSignIn}/>}
+     {isLogoutOpen && <LogoutWindow onClose={closeLogout} onButton={handleLogout}/>}
     </div>
   )
 

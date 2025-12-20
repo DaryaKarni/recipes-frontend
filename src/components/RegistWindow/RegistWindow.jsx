@@ -4,6 +4,8 @@ import cross from '../../assets/cross.svg'
 
 import {useState, useEffect, useRef} from 'react';
 
+import ReactDOM from 'react-dom'
+
 const USER_REGEX = /^[A-Za-z][a-zA-Z0-9-_]{5,16}$/;
 const MAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const PWD_REGEX = /^(?=.*?[0-9])(?=.*?[A-Za-z]).{7,24}$/;
@@ -190,7 +192,7 @@ const RegistWindow = ({onClose}) => {
      }
   }
 
-  return (
+  return ReactDOM.createPortal(
     
 
     <section>
@@ -321,11 +323,9 @@ const RegistWindow = ({onClose}) => {
        </div>
       </div>
       </div>
-
-    </section>
-      
-    
-  )
+       </section>,
+       document.body
+  );
 }
 
 export default RegistWindow
