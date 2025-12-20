@@ -10,6 +10,7 @@ const Popular = () => {
   const {t} = useTranslation();
 
   const {auth} = useContext(AuthContext);
+  const token = auth?.token;
   const [popularData, setPopularData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -21,8 +22,8 @@ const Popular = () => {
         setError(null);
         setIsLoading(true);
         const headers = {};
-        if(auth.token){
-          headers.Authorization = `Bearer ${auth.token}`;
+        if (token) {
+          headers.Authorization = `Bearer ${token}`
         }
         const response = await axios.get(POPULAR_URL, {
           headers

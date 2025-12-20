@@ -54,22 +54,25 @@ const Home = () => {
     fetchDayRecipe();
 
   }, []);
-  console.log('Home RENDER token =', token); 
+  console.log('Home RENDER token =', token);
   const fetchNewRecipes = useCallback(async () => {
-  if (!token) return;
-  
-  console.log('FETCHING with token:', token.substring(0, 20) + '...');
-  
+
+  console.log('FETCHING with token:', token?.substring(0, 20) + '...');
+
   try {
     setNewIsLoading(true);
     setNewError(null);
-    
+
+
+    const headers = {}
+    headers['Content-Type'] = 'application/json'
+    if (token) {
+      headers.Authorization = `Bearer ${token}`
+    }
+
     const response = await fetch('/api/v1/recipes/recent', {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-      }
+      headers
     });
 
     if (!response.ok) {
@@ -109,20 +112,16 @@ useEffect(() => {
     return <div className={styles.home}><p style={{textAlign: 'center', padding: '50px', color: 'red'}}>{error} 😢</p></div>;
   }
 
-  if (!newRecipes) {
-    return <div className={styles.home}><p style={{textAlign: 'center', padding: '50px'}}>{t("unavailable_newRecipes")} 😔</p></div>;
-  }
-
   if (isNewLoading) {
     return <div className={styles.home}><p style={{textAlign: 'center', padding: '50px'}}>{t("loading_newRecipes")} ⏳</p></div>;
   }
 
   if (newError) {
-    return <div className={styles.home}><p style={{textAlign: 'center', padding: '50px', color: 'red'}}>{newError} 😢</p></div>;
+    return <div className={styles.home}><p style={{textAlign: 'center', padding: '50px', color: 'red'}}>{t("unavailable_newRecipes")} 😢</p></div>;
   }
 
-  if (!newRecipes) {
-    return <div className={styles.home}><p style={{textAlign: 'center', padding: '50px'}}>{t("unavailable_dayRecipe")} 😔</p></div>;
+  if (!newRecipes && !isNewLoading) { // Only show if not loading and no recipes
+    return <div className={styles.home}><p style={{textAlign: 'center', padding: '50px'}}>{t("unavailable_newRecipes")} 😔</p></div>;
   }
 
   return (
