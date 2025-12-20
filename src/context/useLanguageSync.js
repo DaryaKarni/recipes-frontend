@@ -5,7 +5,7 @@ import AuthContext from '../context/AuthProvider';
 const LANG_URL = '/api/v1/users/language';
 export const useLanguageSync = () => {
     const { i18n } = useTranslation();
-     const { auth } = useContext(AuthContext); // Если нужна авторизация
+    const { auth } = useContext(AuthContext); // Если нужна авторизация
 
     const currentLang = i18n.language;
     
@@ -16,7 +16,7 @@ export const useLanguageSync = () => {
         i18n.changeLanguage(nextLang); 
         if(auth?.token){
             try {
-                await fetch(LANG_URL, { 
+                const response = await fetch(LANG_URL, { 
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

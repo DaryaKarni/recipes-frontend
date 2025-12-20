@@ -62,7 +62,7 @@ const Favorite = () => {
       {error && <p className={styles["error"]}>{error}</p>}
       {!isLoading && !error && propose && <p>{propose}</p>}
       <div className={styles["fav-recipes"]}>
-        {favData && !isLoading && !error && favData.length > 0 && <BlocksRecipe data={favData} isFavoriteSection={true}/>}
+        {favData && !isLoading && !error && favData.length > 0 && <BlocksRecipe data={favData}/>}
       </div>  
     </div>
   )

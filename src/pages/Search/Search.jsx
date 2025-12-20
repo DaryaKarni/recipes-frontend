@@ -59,7 +59,7 @@ const Search = () => {
       {isLoading && <p>{t("loading_search")}</p>}
       {!isLoading && (error || !searchData || searchData.length === 0) && <p className={styles["error"]}>{error || t("no_results")}</p>}
       <div className={styles["search-recipes"]}>
-        {searchData && searchData.length > 0 && !isLoading && !error && <BlocksRecipe data={searchData} isFavoriteSection={false}/>}
+        {searchData && searchData.length > 0 && !isLoading && !error && <BlocksRecipe data={searchData} />}
       </div>  
     </div>
   )

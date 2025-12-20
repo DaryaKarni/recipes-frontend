@@ -9,15 +9,15 @@ import khachapuri from '../../assets/fake-recipes-images/khachapuri.svg';
 import Button from '../../components/Button/Button';
 import { useTranslation } from 'react-i18next';
 
-import {useState, useEffect } from 'react'
+import {useState, useEffect, useContext, useCallback } from 'react'
 import { useNavigate} from 'react-router-dom';
-
+import AuthContext from '../../context/AuthProvider'
 
 const Home = () => {
   //const dayRecipe = DayRecipeData[0];
   const {t} = useTranslation();
-
-
+  const {auth} = useContext(AuthContext);
+  const token = auth?.token;
   const navigate = useNavigate();
 
 
@@ -54,33 +54,42 @@ const Home = () => {
     fetchDayRecipe();
 
   }, []);
-
-  useEffect (() => {
-    const fetchNewRecipes = async () => {
-      try{
-        setNewIsLoading(true);
-        setNewError(null);
-        const response = await fetch('/api/v1/recipes/recent');
-
-        if(!response.ok){
-          throw new Error(`HTTP Error! status: ${response.status}`);
-        }
-
-        const jsonResponse = await response.json();
-        setNewRecipes(jsonResponse.data);
+  console.log('Home RENDER token =', token); 
+  const fetchNewRecipes = useCallback(async () => {
+  if (!token) return;
+  
+  console.log('FETCHING with token:', token.substring(0, 20) + '...');
+  
+  try {
+    setNewIsLoading(true);
+    setNewError(null);
+    
+    const response = await fetch('/api/v1/recipes/recent', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
       }
-      catch(e){
-        console.error("Failed to fetch recipe:", e);
-        setNewError('Не удалось загрузить рецепт дня. Попробуйте обновить страницу.');
-        setNewIsLoading(false);
-      }
-      finally{
-        setNewIsLoading(false);
-      }
-    };
-    fetchNewRecipes();
+    });
 
-  }, []);
+    if (!response.ok) {
+      throw new Error(`HTTP Error! status: ${response.status}`);
+    }
+
+    const jsonResponse = await response.json();
+    console.log('RECENT RECIPES:', jsonResponse.data); // 🔍 СМОТРИ ЗДЕСЬ!
+    setNewRecipes(jsonResponse.data);
+  } catch(e) {
+    console.error("Failed to fetch recent recipes:", e);
+    setNewError('Не удалось загрузить новые рецепты.');
+  } finally {
+    setNewIsLoading(false);
+  }
+}, [token]); // Зависимость только от token
+
+useEffect(() => {
+  fetchNewRecipes();
+}, [fetchNewRecipes]); // Стабильная функция ✅
 
   const HandleClickToRecipe = () => {
     if (dayRecipe && dayRecipe.id !== undefined) {

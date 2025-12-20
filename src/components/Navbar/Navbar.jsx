@@ -9,6 +9,7 @@ import LogoutWindow from '../LogoutWindow/LogoutWindow';
 import {Link, useNavigate, useSearchParams, useLocation} from 'react-router-dom'
 import {useTranslation} from 'react-i18next'
 import { useLanguageSync } from '../../context/useLanguageSync';
+import { useModal } from '../../context/ModalContext';
 
 //import {Link} from 'react-router-dom'
 
@@ -23,6 +24,8 @@ const Navbar = () => {
 
   const location = useLocation();
 
+  const {isSignInOpen, openSignIn, closeSignIn} = useModal();
+
   const handleLanguageToggle = () => {
     syncLanguageWithBackend(nextLang);
   }
@@ -30,7 +33,6 @@ const Navbar = () => {
   const handleLogout = () => {
     setAuth({ user: null, role: null, accessToken: null });
     localStorage.removeItem('token');
-    navigate(`/search?q=${encodeURIComponent(query.trim())}`);//
   }
 
   const isAdmin = Array.isArray(auth?.roles) 
@@ -41,9 +43,6 @@ const Navbar = () => {
   const openRegist = () => setIsRegistOpen(true);
   const closeRegist = () => setIsRegistOpen(false);
 
-  const [isSignInOpen, setIsSignIntOpen] = useState(false);
-  const openSignIn = () => setIsSignIntOpen(true);
-  const closeSignIn = () => setIsSignIntOpen(false);
 
   const [isLogoutOpen, setIsLogoutOpen] = useState(false);
   const openLogout = () => setIsLogoutOpen(true);

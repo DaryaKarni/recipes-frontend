@@ -48,7 +48,7 @@ const Popular = () => {
       {isLoading && <p>{t("loading_popular")}</p>}
       {error && <p className={styles["error"]}>{error}</p>}
       <div className={styles["popular-recipes"]}>
-        {popularData && !isLoading && !error && <BlocksRecipe data={popularData} isFavoriteSection={false}/>}
+        {popularData && !isLoading && !error && <BlocksRecipe data={popularData}/>}
       </div>  
     </div>
   )

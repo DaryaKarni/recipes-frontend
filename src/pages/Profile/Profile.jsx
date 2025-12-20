@@ -89,7 +89,7 @@ const Profile = () => {
           {error && <p className={styles["error"]}>{error}</p>}
           {!isLoading && !error && propose && <p>{propose}</p>}
           <div className={styles["recipesBlock"]}>
-            {!isLoading && !error && myRecipes && myRecipes.length > 0 && (<BlocksRecipe data={myRecipes} isFavoriteSection={false}/>) }
+            {!isLoading && !error && myRecipes && myRecipes.length > 0 && (<BlocksRecipe data={myRecipes}/>) }
           </div>
 
     </div>

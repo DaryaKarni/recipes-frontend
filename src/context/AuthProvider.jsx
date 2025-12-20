@@ -1,6 +1,7 @@
 import {createContext, useContext, useState, useEffect} from 'react'
 import { jwtDecode } from "jwt-decode";
 import axios from 'axios';
+
 const AuthContext = createContext({});
 const AVATAR_URL = '/api/v1/users/avatar';
 
