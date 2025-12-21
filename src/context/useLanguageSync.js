@@ -1,11 +1,11 @@
 import { useTranslation } from 'react-i18next';
-import { useContext } from 'react'; // Если вам нужен AuthContext
+import { useContext } from 'react';
 import AuthContext from '../context/AuthProvider'; 
 
 const LANG_URL = '/api/v1/users/language';
 export const useLanguageSync = () => {
     const { i18n } = useTranslation();
-    const { auth } = useContext(AuthContext); // Если нужна авторизация
+    const { auth } = useContext(AuthContext);
 
     const currentLang = i18n.language;
     
