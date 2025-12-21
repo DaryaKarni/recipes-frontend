@@ -60,6 +60,33 @@ const resources = {
       "search_title": "Search results",
       "loading_search": "Loading search results...",
       "no_results": "No recipes found",
+
+      "sure_to_logout": "Sure to log out?",
+      "yes": "Yes",
+      "no": "No",
+      "registration": "Registration",
+      "login": "login:",
+      "mail": "email:",
+      "password": "password:",
+      "repeat": "repeat",
+      "repeate_password": "repeate password:",
+      "success": "Success!",
+      "completed": "Registration completed!",
+      "completed_under": "You are successfuly registered in system.",
+      "mail_msg": "Check your email to comfirm registration",
+      
+      "login_val1": "from 6 to 16 characters. Must begin with a letter.",
+      "login_val2": "Latin letters, numbers, _, - allowed",
+      "login_val_exist": "User with such login already exists in the system",
+      "mail_val1": "Invalid email format.",
+      "mail_val2": "Address must contain @ symbol and domain",
+      "mail_val_exist": "User with this email already registered in the system",
+      "pwd_val1": "from 8 to 24 characters.",
+      "pwd_val2": "Must include numbers and Latin letters.",
+      "pwd_val_repeat": "passwords should match",
+      "continue": "Continue",
+
+      "signIn": "Sign In",
     }
   },
   ru: {
@@ -118,6 +145,35 @@ const resources = {
       "search_title": "Результаты поиска",
       "loading_search": "Загрузка результатов поиска...",
       "no_results": "Рецепты не найдены",
+
+      "sure_to_logout": "Вы точно хотите выйти?",
+      "yes": "Да",
+      "no": "Нет",
+
+      "registration": "Регистрация",
+      "login": "логин:",
+      "mail": "почта:",
+      "password": "пароль:",
+      "repeat": "повторите",
+      "success": "Успех!",
+      "completed": "Регистрация завершена!",
+      "completed_under": "Вы успешно зарегистрированы в системе.",
+      "mail_msg": "Перейдите на почту для подтверждения регистрации",
+
+      "login_val1": "от 6 до 16 символов. Должно начинаться с буквы.",
+      "login_val2": "Латинские буквы, числа, _, - разрешены",
+      "login_val_exist": "Пользователь с таким логином уже существует в системе",
+      "mail_val1": "неверный формат электронной почты.",
+      "mail_val2": "Адрес должен содержать символ @ и домен",
+      "mail_val_exist": "Пользователь с данной почтой уже зарегистрирован в системе",
+      "pwd_val1": "от 8 до 24 символов.",
+      "pwd_val2": "Должен включать числа и латинские буквы.",
+      "pwd_val_repeat": "пароли должны совпадать",
+      "continue": "Продолжить",
+
+      "signIn": "Вход",
+
+
     }
   }
 };

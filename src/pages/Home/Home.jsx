@@ -88,7 +88,7 @@ const Home = () => {
   } finally {
     setNewIsLoading(false);
   }
-}, [token]); // Зависимость только от token
+}, []); // Зависимость только от token
 
 useEffect(() => {
   fetchNewRecipes();

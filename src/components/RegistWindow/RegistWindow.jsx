@@ -5,6 +5,7 @@ import cross from '../../assets/cross.svg'
 import {useState, useEffect, useRef} from 'react';
 
 import ReactDOM from 'react-dom'
+import { useTranslation } from 'react-i18next';
 
 const USER_REGEX = /^[A-Za-z][a-zA-Z0-9-_]{5,16}$/;
 const MAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -15,6 +16,7 @@ const CHECK_MAIL_URL = '/api/v1/validation/check-email';
 const REGISTER_URL = '/api/v1/auth/register';
 
 const RegistWindow = ({onClose}) => {
+  const {t} = useTranslation();
   const userRef = useRef();
   const mailRef = useRef();
   const errRef = useRef();
@@ -199,14 +201,14 @@ const RegistWindow = ({onClose}) => {
      <div className={styles["window"]}>
        <div className={styles["frame"]}>
         <div className={styles["block"]}>
-          <p className={styles["title"]}>{!success ? 'Регистрация' : 'Успех'}</p>
+          <p className={styles["title"]}>{!success ? t("registration") : t("success")}</p>
           <img src={cross} className={styles["cross"]} onClick={onClose}/>
           {success ? 
       ( <div className={styles["successBlock"]}>
         <p>🎉</p>
-                <h3>Регистрация завершена!</h3>
-                <p>Вы успешно зарегистрированы в системе.<br/>
-                Перейдите на почту для подтверждения регистраци
+                <h3>{t("completed")}</h3>
+                <p>{t("completed_under")}<br/>
+                {t("mail_msg")}
               </p>
            </div>    
       ) : (
@@ -216,12 +218,12 @@ const RegistWindow = ({onClose}) => {
       
           <div className={styles["fields"]}>
             <div className={styles["columnNames"]}>
-              <label htmlFor='username'>логин: </label>
-              <label htmlFor='mail'>почта: </label>
-              <label htmlFor='password'>пароль: </label>
+              <label htmlFor='username'>{t("login")} </label>
+              <label htmlFor='mail'>{t("mail")}</label>
+              <label htmlFor='password'>{t("password")}</label>
               <label htmlFor='confirm_pwd'>
-                повторите<br/> 
-                пароль: 
+                {t("repeat")}<br/> 
+                {t("password")}
               </label>
             </div>
               <div className={styles["inputFields"]}>
@@ -246,12 +248,11 @@ const RegistWindow = ({onClose}) => {
                   className={styles["loginInput"]}
                   />
                   <p id= 'nonValidName' className={user && !validName ? styles['instructions'] : styles['offscreen']}>
-                    от 6 до 16 символов.
-                    Должно начинаться с буквы.<br/>
-                    Латинские буквы, числа, _, - разрешены
+                    {t("login_val1")}<br/>
+                    {t("login_val2")}
                   </p>
                    <p id= 'existingName' className={!userAvailable && user && validName  ? styles['instructions'] : styles['offscreen']}>
-                    Пользователь с таким логином уже существует в системе
+                    {t("login_val_exist")}
                   </p>
                 </div>
               <div className={styles["mailBlock"]}>
@@ -273,11 +274,11 @@ const RegistWindow = ({onClose}) => {
                  className={styles["mailInput"]}
                  />
                 <p id= 'nonValueMail' className={mail && !validMail ? styles['instructions'] : styles['offscreen']}>
-                  Неверный формат электронной почты. <br/>
-                  Адрес должен содержать символ @ и  домен.
+                  {t("mail_val1")}<br/>
+                  {t("mail_val2")}
                 </p>
                 <p id= 'existingMail' className={ mail && validMail && !mailAvailable ? styles['instructions'] : styles['offscreen']}>
-                  Пользователь с данной почтой уже зарегистрирован в системе.
+                  {t("mail_val_exist")}
                 </p>
                 
               </div>
@@ -292,8 +293,8 @@ const RegistWindow = ({onClose}) => {
                   className={styles["passwordInput"]}
                  />
                 <p id= 'pwdnote' className={pwd && !validPwd ? styles['instructions'] : styles['offscreen']}>
-                  от 8 до 24 символов <br/>
-                  Должен включать числа и латинские буквы.
+                  {t("pwd_val1")}<br/>
+                  {t("pwd_val2")}
                 </p>
               </div>
               <div className={styles["repeatPasswordBlock"]}>
@@ -307,7 +308,7 @@ const RegistWindow = ({onClose}) => {
                   className={styles["repeatPasswordInput"]}
                 />
                 <p id= 'confirmnote' className={ matchPwd && !validMatch ? styles['instructions'] : styles['offscreen']}>
-                  Пароли должны совпадать.
+                  {t("pwd_val_repeat")}
                 </p>
               </div>
               
@@ -317,7 +318,7 @@ const RegistWindow = ({onClose}) => {
           <Button 
           type = "submit"
           disabled={!validName || !userAvailable || !validMail || !mailAvailable || !validPwd || !validMatch || success ? true : false} 
-          buttonName={'продолжить'} />
+          buttonName={t("continue")} />
           </form>
       )}
        </div>

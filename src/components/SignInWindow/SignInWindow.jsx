@@ -5,10 +5,12 @@
   import AuthContext from '../../context/AuthProvider'
   import {jwtDecode} from 'jwt-decode'
   import ReactDOM from 'react-dom'
+import { useTranslation } from 'react-i18next'
 
   const LOGIN_URL = "/api/v1/auth/login"
 
   const SignInWindow = ({onClose}) => {
+    const {t} = useTranslation();
     const {setAuth} = useContext(AuthContext);
     const userRef = useRef();
     const errRef = useRef();
@@ -94,13 +96,13 @@
       <div className={styles["window"]}>
         <div className={styles["frame"]}>
           <div className={styles["block"]}>
-            <p className={styles["title"]}>Вход</p>
+            <p className={styles["title"]}>{t("signIn")}</p>
             <img src={cross} className={styles["cross"]} onClick={onClose}/>
             <form onSubmit={handleSubmit} className={styles["formBlock"]}>
             <div className={styles["fields"]}>
               <div className={styles["columnNames"]}>
-                <label htmlFor='username'>логин: </label>
-                <label htmlFor='password'>пароль: </label>
+                <label htmlFor='username'>{t("login")}</label>
+                <label htmlFor='password'>{t("password")}</label>
               </div>
               <div className={styles["inputFields"]}>
                 <div className={styles["loginBlock"]}>
@@ -128,7 +130,7 @@
             <Button 
             type = "submit"
             disabled={!user || !pwd || success}
-            buttonName={'продолжить'}/>
+            buttonName={t("continue")}/>
             </form>
           </div>
         </div>
