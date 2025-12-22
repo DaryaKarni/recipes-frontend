@@ -32,15 +32,15 @@ const RecipeCard = ({recipe, isSmall}) => {
 
       try {
         const url = `/api/v1/favorites/${recipe.id}`
-        const headers = {
+        const config = {
           headers: {
             Authorization: `Bearer ${token}`
           }
         }
         if (isLiked) {
-          await axios.post(url, headers)
+          await axios.post(url,{}, config)
         } else {
-          await axios.delete(url, headers)
+          await axios.delete(url, config)
         }
       }
       catch(e){
