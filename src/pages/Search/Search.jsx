@@ -1,16 +1,17 @@
 import styles from "./Search.module.scss"
 import BlocksRecipe from '../../components/BlocksRecipe/BlocksRecipe';
 import { useTranslation } from "react-i18next";
-import { useState, useEffect } from "react";
+import {useState, useEffect, useContext} from "react";
 const SEARCH_URL = "/api/v1/recipes/title";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
+import AuthContext from "../../context/AuthProvider.jsx";
 
 const Search = () => {
   const {t} = useTranslation();
 
-  //const {auth} = useContext(AuthContext);
-  //const token = auth?.token;
+  const {auth} = useContext(AuthContext);
+  const token = auth?.token;
   const [searchData, setSearchData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -28,14 +29,18 @@ const Search = () => {
       setIsLoading(true);
       try{
         console.log("Отправляю запрос на:", SEARCH_URL, "с параметром title=", query); // ЛОГ 1
+        const headers = {};
+        if (token) {
+          headers.Authorization = `Bearer ${token}`
+        }
         const response = await axios.get(SEARCH_URL, {
           params: {
-            title: query
-            //'Authorization': `Bearer ${token}`
-          }
+            title: query,
+          },
+          headers
         });
         console.log('FULL API response:', response); // Весь объект ответа
-// Тело ответа
+// Тепло ответа
         console.log('API response:', response.data);
         const searchArray = response.data.data;
         setSearchData(searchArray);
