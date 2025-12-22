@@ -22,29 +22,29 @@ const RecipeCard = ({recipe, isSmall}) => {
       openSignIn();
       return;
     }
-    else{
-      setIsLiked(prevIsLiked => !prevIsLiked);
-      if (!auth?.token) return;
-      const updateIsLiked = async() => {
-
-        try {
-          const url = `/api/v1/favorites/${recipe.id}`
-          const config = {
-            headers: {
-              Authorization: `Bearer ${token}`
+    else {
+      setIsLiked(prevIsLiked => {
+        const updatedIsLiked = !prevIsLiked
+        const updateIsLiked = async () => {
+          try {
+            const url = `/api/v1/favorites/${recipe.id}`
+            const config = {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
             }
-          }
-          if (isLiked) {
-            await axios.post(url,{}, config)
-          } else {
-            await axios.delete(url, config)
+            if (updatedIsLiked) {
+              await axios.post(url, {}, config)
+            } else {
+              await axios.delete(url, config)
+            }
+          } catch (e) {
+            console.error('Failed to update favorite', e);
           }
         }
-        catch(e){
-          console.error('Failed to update favorite', e);
-        }
-      }
-      updateIsLiked();
+        updateIsLiked();
+        return updatedIsLiked
+      });
     }
   }
 
