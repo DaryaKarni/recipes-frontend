@@ -15,7 +15,6 @@ const RecipeCard = ({recipe, isSmall}) => {
   const {auth} = useContext(AuthContext);
   const token = auth?.token;
   const {isSignInOpen, openSignIn, closeSignIn} = useModal();
-  const [isMounted, setIsMounted] = useState(false); 
   const heartIcon = isLiked ? heartFilled : heartEmpty;
   const HandleLikeToggle = (event) =>{
     event.stopPropagation();
@@ -28,39 +27,34 @@ const RecipeCard = ({recipe, isSmall}) => {
     }
   }
   useEffect(() => {
-    if (!isMounted) {
-      setIsMounted(true);
-      return;
-    }
     if (!auth?.token) return;
-    const putIsLiked = async() => {
+    const updateIsLiked = async() => {
 
-      try{
-        await axios.put( 
-          `/api/v1/favorites/${recipe.id}`,
-          {isFavourite: isLiked},
-          {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
+      try {
+        const url = `/api/v1/favorites/${recipe.id}`
+        const headers = {
+          headers: {
+            Authorization: `Bearer ${token}`
           }
-        );
-        
-      } 
+        }
+        if (isLiked) {
+          await axios.post(url, headers)
+        } else {
+          await axios.delete(url, headers)
+        }
+      }
       catch(e){
         console.error('Failed to update favorite', e);
-        setIsLiked(recipe.isFavourite ?? false);
       }
     }
-    putIsLiked();
-    console.log(recipe);
-  }, [isLiked, auth?.token]);
+    updateIsLiked();
+  }, [isLiked]);
 
   const HandleCardClick = () => {
     navigate(`/recipe/${recipe.id}`);
   }
 
-  
+
   const smallClass = isSmall ? styles['card--small'] : '';
   const cardClasses = `${styles.card} ${smallClass}`;
 
@@ -70,8 +64,8 @@ const RecipeCard = ({recipe, isSmall}) => {
         <div className={styles['image-container']}>
           <img src={`/uploads/recipes/${recipe.image}`} alt={recipe.title} className={styles["image"]}/>
           <div className={styles["favorite"]}>
-            <img src={heartIcon} 
-            alt="" 
+            <img src={heartIcon}
+            alt=""
             onClick={HandleLikeToggle}/>
           </div>
         </div>
