@@ -10,7 +10,7 @@ import {useModal} from '../../context/ModalContext'
 import SignInWindow from '../SignInWindow/SignInWindow'
 
 const RecipeCard = ({recipe, isSmall}) => {
-  const [isLiked, setIsLiked] = useState(recipe.isFavourite ?? false);
+  const [isLiked, setIsLiked] = useState(recipe.isFavourite || false);
   const navigate = useNavigate();
   const {auth} = useContext(AuthContext);
   const token = auth?.token;
@@ -24,31 +24,29 @@ const RecipeCard = ({recipe, isSmall}) => {
     }
     else{
       setIsLiked(prevIsLiked => !prevIsLiked);
-    }
-  }
-  useEffect(() => {
-    if (!auth?.token) return;
-    const updateIsLiked = async() => {
+      if (!auth?.token) return;
+      const updateIsLiked = async() => {
 
-      try {
-        const url = `/api/v1/favorites/${recipe.id}`
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`
+        try {
+          const url = `/api/v1/favorites/${recipe.id}`
+          const config = {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+          if (isLiked) {
+            await axios.post(url,{}, config)
+          } else {
+            await axios.delete(url, config)
           }
         }
-        if (isLiked) {
-          await axios.post(url,{}, config)
-        } else {
-          await axios.delete(url, config)
+        catch(e){
+          console.error('Failed to update favorite', e);
         }
       }
-      catch(e){
-        console.error('Failed to update favorite', e);
-      }
+      updateIsLiked();
     }
-    updateIsLiked();
-  }, [isLiked]);
+  }
 
   const HandleCardClick = () => {
     navigate(`/recipe/${recipe.id}`);
