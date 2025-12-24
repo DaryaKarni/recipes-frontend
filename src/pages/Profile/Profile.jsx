@@ -17,7 +17,7 @@ const Profile = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [propose, setPropose] = useState(null);
-  const proposeTextRus = 'Создайте свой первый рецепт';
+  const proposeText = t("propose");
 
   useEffect (() => {
     const fetchMyRecipes = async() => {
@@ -48,9 +48,6 @@ const Profile = () => {
         const myRecipesArray = jsonResponse.data;
         setMyRecipes(myRecipesArray);
         console.log({myRecipes});
-        if(myRecipesArray && myRecipesArray.length === 0){
-          setPropose(proposeTextRus);
-        }
       }
       catch(e){
         console.error('Failed to fetch my recipes!', e);
@@ -64,6 +61,12 @@ const Profile = () => {
       fetchMyRecipes();
     }
   }, [token]);
+
+  useEffect(()=> {
+    if(myRecipes && myRecipes.length === 0){
+      setPropose(proposeText);
+    }
+  },[myRecipes, proposeText]);
 
   return (
     <div className={styles.profile}>
@@ -85,7 +88,7 @@ const Profile = () => {
 
 
           <p className={styles["title"]}>{t("myRecipes_title")}</p>
-          {isLoading && <p>Загрузка ваших рецептов...</p>}
+          {isLoading && <p>{t("loading_your_recipes")}</p>}
           {error && <p className={styles["error"]}>{error}</p>}
           {!isLoading && !error && propose && <p>{propose}</p>}
           <div className={styles["recipesBlock"]}>

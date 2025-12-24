@@ -17,7 +17,7 @@ const Navbar = () => {
   const {auth, setAuth} = useContext(AuthContext);
   const navigate = useNavigate();
   const {t} = useTranslation();
-
+  
   const {nextLang, syncLanguageWithBackend} = useLanguageSync();
   const [searchParams] = useSearchParams();
   const [query, setQuery] = useState(searchParams.get("q") || "");

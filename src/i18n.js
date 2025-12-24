@@ -19,7 +19,11 @@ const resources = {
       "newRecipes_title": "Latest recipes",
 
       "myFav_title": "My favorite",
+
       "myProfile_title": "My profile",
+      "propose": "Create your first recipe",
+      "loading_your_recipes": "Loading ypur recipes...",
+
       "myRecipes_title": "My recipes",
 
       "author": "author",
@@ -105,7 +109,11 @@ const resources = {
       "newRecipes_title": "Новейшие рецепты",
 
       "myFav_title": "Моё избранное",
+
       "myProfile_title": "Мой профиль",
+      "propose": "Создайте свой первый рецепт",
+      "loading_your_recipes": "Загрузка ваших рецептов...",
+
       "myRecipes_title": "Мои рецепты",
 
       "author": "автор",

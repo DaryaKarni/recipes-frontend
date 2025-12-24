@@ -1,11 +1,12 @@
 import { useTranslation } from 'react-i18next';
 import styles from './Comment.module.scss'
-import {useRef, useEffect, useState} from 'react'
+import {useRef, useEffect, useState, useContext} from 'react'
 
 const Comment = ({authorUsername, initialText, isPersonal}) => {
   const {t} = useTranslation();
   const [commentText, setCommentText] = useState('');
   const textareaRef = useRef(null);
+
 
   const adjustHeight = () => {
         const textarea = textareaRef.current;
@@ -26,7 +27,7 @@ const Comment = ({authorUsername, initialText, isPersonal}) => {
   };
 
   const handleChange = (e) => {
-        setCommentText(e.target.value);    
+    setCommentText(e.target.value);    
   };
   const author = `${addressUser({isPersonal})} ${authorUsername}`
 

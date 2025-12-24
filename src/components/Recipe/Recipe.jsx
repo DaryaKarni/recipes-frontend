@@ -10,12 +10,22 @@ import Button from '../Button/Button'
 import { useTranslation } from 'react-i18next'
 import { useContext } from 'react'
 import AuthContext from '../../context/AuthProvider'
+import { useModal } from '../../context/ModalContext'
 
 const Recipe = ({recipe}) => {
   const {t} = useTranslation();
   const {auth} = useContext(AuthContext);
+  const {openSignIn} = useModal();
+  const token = auth?.token;
   const handleNewRating = (newRating) => {
     console.log('new rating:', newRating)
+  }
+
+  const handleCommentButtonClick = () => {
+    if(!token){
+      openSignIn();
+      return;
+    }
   }
   return (
     <div className={styles["recipe"]}>
@@ -106,7 +116,7 @@ const Recipe = ({recipe}) => {
               </div>
              <div className={styles["button"]}>
               <Button 
-        
+              onClick = {handleCommentButtonClick}
               buttonName = {t("send_comment")}
               />
               </div>
