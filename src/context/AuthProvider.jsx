@@ -5,6 +5,7 @@ import axios from 'axios';
 const AuthContext = createContext({});
 const AVATAR_URL = '/api/v1/users/avatar';
 
+
 export const AuthProvider = ({children}) => {
   const [auth, setAuth] = useState(() => {
     const token = localStorage.getItem('token');
@@ -24,7 +25,7 @@ export const AuthProvider = ({children}) => {
         return {user: null, role: null, token: null, avatar: null}
       }
     }
-    return {user: null, role: null, token: null? avatar: null};
+    return {user: null, role: null, token: null, avatar: null};
   });
 
   useEffect (() => {
@@ -45,6 +46,8 @@ export const AuthProvider = ({children}) => {
             avatar: avatar,
           }));
         }
+        console.log('GET /api/v1/users/avatar', response.data);
+
       }
       catch(e){
         if (axios.isAxiosError(e) && e.response?.status === 401) {
